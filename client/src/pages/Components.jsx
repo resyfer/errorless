@@ -1,10 +1,9 @@
 //* React
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 //* Components
 import Button from "../components/Button";
-
-//* CSS
+import Input from "../components/Input";
 
 const Components = (props) => {
   //* Set Title
@@ -12,13 +11,21 @@ const Components = (props) => {
     document.title = props.title;
   }, [props.title]);
 
+  const [inputValue, setInputValue] = useState("");
+
   return (
     <main className="home">
       Components
       <br />
       Page
       <br />
+      <br />
       <Button name="Hello" link="/" />
+      <br />
+      <br />
+      <Input placeholder="Hello" setValue={setInputValue} />
+      <br />
+      Value: {inputValue}
     </main>
   );
 };
