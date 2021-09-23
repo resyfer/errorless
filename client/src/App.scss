@@ -1,0 +1,24 @@
+/**Scrollbar**/
+::-webkit-scrollbar {
+	width: 1vh;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--theme-1-100);
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 3vh;
+	background: var(--theme-4-100);
+}
+
+:root {
+	--navbar-pc-height: 8vh;
+	--navbar-mob-height: 10vw;
+	--footer-pc-height: 8vh;
+
+	--theme-1-100: #f4eeff;
+	--theme-2-100: #dcd6f7;
+	--theme-3-100: #a6b1e1;
+	--theme-4-100: #424874;
+}
