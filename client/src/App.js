@@ -17,6 +17,7 @@ import Navbar from "./components/Navbar";
 
 //* CSS
 import "./App.scss";
+import Profile from "./pages/Profile";
 
 function App() {
   const jwt = Cookies.get("jwt");
@@ -52,6 +53,10 @@ function App() {
 
             <Route path="/institute/:id">
               <Institute />
+            </Route>
+
+            <Route path="/user/:id">
+              <Profile />
             </Route>
           </Switch>
         </Router>

@@ -23,7 +23,7 @@ const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,1000}$/;
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const Auth = () => {
+const Auth = (props) => {
   const [isSignin, setIsSignin] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -39,6 +39,10 @@ const Auth = () => {
     setIsSignin((prev) => !prev);
     setIsError("");
   };
+
+  useEffect(() => {
+    document.title = props.title;
+  }, [props.title]);
 
   useEffect(() => {
     setIsError("");

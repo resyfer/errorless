@@ -35,15 +35,12 @@ module.exports.signup = async (req, res) => {
       });
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const username = email.split("@")[0];
     const newUser = await new User({
       name,
       email,
       password: hashedPassword,
-      username,
     });
     const user = await newUser.save();
-    console.log(user);
     const token = jwt.sign(
       {
         email: user.email,

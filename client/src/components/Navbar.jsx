@@ -41,7 +41,7 @@ const Navbar = (props) => {
       </Link>
       <ul className="nav-items-ctnr">
         <li>
-          <Link to={`/user/${user.id}`}>Home</Link>
+          <Link to={`/user/${user.id}`}>Profile</Link>
         </li>
         <li>
           <Link to={`/institute/${user.organisation.id}`}>Institute</Link>
