@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 
 //* CSS Import
 import "./css/Auth.scss";
@@ -113,6 +113,10 @@ const Auth = () => {
         });
     }
   };
+
+  if (userCtx.loggedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <main className="auth">

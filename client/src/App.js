@@ -1,11 +1,6 @@
 //* React
 import { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //* Dependencies
 import Cookies from "js-cookie";
@@ -15,6 +10,7 @@ import UserContext from "./context/UserContext";
 import Home from "./pages/Home";
 import Components from "./pages/Components";
 import Auth from "./pages/Auth";
+import Institute from "./pages/Institute";
 
 //* Components
 import Navbar from "./components/Navbar";
@@ -50,13 +46,13 @@ function App() {
               <Components title="Components | Errorless" />
             </Route>
 
-            {loggedIn ? (
-              <Redirect to="/" />
-            ) : (
-              <Route exact path="/auth">
-                <Auth title="Auth | Errorless" />
-              </Route>
-            )}
+            <Route exact path="/auth">
+              <Auth title="Auth | Errorless" />
+            </Route>
+
+            <Route path="/institute/:id">
+              <Institute />
+            </Route>
           </Switch>
         </Router>
       </UserContext.Provider>
