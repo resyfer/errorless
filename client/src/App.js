@@ -1,6 +1,11 @@
 //* React
-import { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 //* Dependencies
 import Cookies from "js-cookie";
@@ -22,6 +27,14 @@ function App() {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const getUser = Cookies.get("user");
+    if (getUser) {
+      setUser(JSON.parse(getUser));
+      setLoggedIn(true);
+    }
+  }, []);
+
   return (
     <div className="App">
       <UserContext.Provider
@@ -37,9 +50,13 @@ function App() {
               <Components title="Components | Errorless" />
             </Route>
 
-            <Route exact path="/auth">
-              <Auth title="Auth | Errorless" />
-            </Route>
+            {loggedIn ? (
+              <Redirect to="/" />
+            ) : (
+              <Route exact path="/auth">
+                <Auth title="Auth | Errorless" />
+              </Route>
+            )}
           </Switch>
         </Router>
       </UserContext.Provider>

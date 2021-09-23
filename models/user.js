@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    username: {
-      type: String,
-      unique: true,
-    },
     name: {
       type: String,
       required: true,
@@ -20,25 +16,46 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 8,
     },
-    profileImg: {
+    photo: {
       type: String,
       default: "",
     },
-    bio: {
+    status: {
       type: String,
-      default: "",
-    },
-    dateOfBirth: {
-      type: Date,
-      default: null,
+      enum: {
+        values: ["Alive", "Infected", "Dead"],
+        message: "Value outside accepted fields",
+      },
     },
     phoneNo: {
       type: Number,
       default: null,
     },
-    address: {
-      type: String,
-      default: "",
+    history: {
+      type: [
+        {
+          date: Date,
+          event: String,
+        },
+      ],
+    },
+    vaccinationStatus: {
+      type: Number,
+      enum: {
+        default: [0, 1, 2],
+        message: "The values are not in the range",
+      },
+    },
+    organisation: {
+      orgId: mongoose.Schema.Types.ObjectId,
+      name: {
+        type: String,
+        default: "",
+      },
+      designation: {
+        type: String,
+        default: "",
+      },
     },
   },
   { timestamps: true }

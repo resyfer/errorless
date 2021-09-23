@@ -15,6 +15,13 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      .authError {
+        margin: 0.4rem;
+        color: rgb(255, 97, 97);
+        font-weight: bold;
+        letter-spacing: 0.1rem;
+      }
     }
   }
   .authMsg {

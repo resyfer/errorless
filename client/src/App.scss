@@ -1,54 +1,53 @@
 /**Scrollbar**/
 ::-webkit-scrollbar {
-	width: 1vh;
+  width: 1vh;
 }
 
 ::-webkit-scrollbar-track {
-	background: var(--theme-1-100);
+  background: var(--theme-1-100);
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: 3vh;
-	background: var(--theme-4-100);
+  border-radius: 3vh;
+  background: var(--theme-4-100);
 }
 
 :root {
-	--navbar-pc-height: 8vh;
-	--navbar-mob-height: 10vw;
-	--footer-pc-height: 8vh;
+  --navbar-pc-height: 8vh;
+  --navbar-mob-height: 10vw;
+  --footer-pc-height: 8vh;
 
-	--theme-1-100: #f4eeff;
-	--theme-2-100: #dcd6f7;
-	--theme-3-100: #a6b1e1;
-	--theme-4-100: #424874;
-	--theme-4-070: rgba(67, 73, 117, 0.7);
+  --theme-1-100: #f4eeff;
+  --theme-2-100: #dcd6f7;
+  --theme-3-100: #a6b1e1;
+  --theme-4-100: #424874;
+  --theme-4-070: rgba(67, 73, 117, 0.7);
 }
 
 /**Apply For All**/
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	scroll-behavior: smooth;
-	font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
-	background-color: var(--theme-1-100);
+  background-color: var(--theme-1-100);
 }
 
 a.btn {
-	text-decoration: none;
-	color: var(--theme-1-100);
+  text-decoration: none;
+  color: var(--theme-1-100);
 }
 
 span.bold {
-	color: var(--theme-4-100) !important;
-	font-weight: bolder;
+  color: var(--theme-4-100) !important;
+  font-weight: bolder;
 }
 
 main {
-	height: calc(100vh - var(--navbar-pc-height));
-	margin-top: var(--navbar-pc-height);
-	padding: 2rem 4rem;
+  height: calc(100vh - var(--navbar-pc-height));
+  padding: 2rem 4rem;
 }

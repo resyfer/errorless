@@ -14,7 +14,12 @@ const Button = (props) => {
       onClick={() => link.current.click()}
       style={props.style}
     >
-      <Link to={props.link} ref={link} className="btn-link">
+      <Link
+        to={props.link}
+        ref={link}
+        className="btn-link"
+        onClick={props.onClick}
+      >
         {props.name}
       </Link>
     </div>

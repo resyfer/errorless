@@ -43,6 +43,7 @@ module.exports.signup = async (req, res) => {
       username,
     });
     const user = await newUser.save();
+    console.log(user);
     const token = jwt.sign(
       {
         email: user.email,
@@ -53,6 +54,7 @@ module.exports.signup = async (req, res) => {
     );
     res.json({ success: true, user, token });
   } catch (err) {
+    console.log(err);
     res.json({
       success: false,
       message: "Internal Server error. Please try again",
