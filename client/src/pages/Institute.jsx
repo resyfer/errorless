@@ -90,7 +90,7 @@ const Institute = () => {
 
 	//* Set Title
 	useEffect(() => {
-		document.title = org.name + ' | Errorless';
+		document.title = org.name + ' | CoLive-21';
 	}, [org.name]);
 
 	return (

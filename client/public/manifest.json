@@ -1,51 +1,51 @@
 {
-  "name": "Errorless PWA",
-  "short_name": "Errorless",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#f4eeff",
-  "theme_color": "#424874",
-  "orientation": "portrait-primary",
-  "icons": [
-    {
-      "src": "/img/icon-16-16.png",
-      "type": "image/png",
-      "sizes": "16x16"
-    },
-    {
-      "src": "/img/icon-32-32.png",
-      "type": "image/png",
-      "sizes": "32x32"
-    },
-    {
-      "src": "/img/icon-48-48.png",
-      "type": "image/png",
-      "sizes": "48x48"
-    },
-    {
-      "src": "/img/icon-64-64.png",
-      "type": "image/png",
-      "sizes": "64x64"
-    },
-    {
-      "src": "/img/icon-90-90.png",
-      "type": "image/png",
-      "sizes": "90x90"
-    },
-    {
-      "src": "/img/icon-128-128.png",
-      "type": "image/png",
-      "sizes": "128x128"
-    },
-    {
-      "src": "/img/icon-256-256.png",
-      "type": "image/png",
-      "sizes": "256x256"
-    },
-    {
-      "src": "/img/icon-512-512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ]
+	"name": "CoLive-21",
+	"short_name": "CoLive-21",
+	"start_url": ".",
+	"display": "standalone",
+	"background_color": "#f4eeff",
+	"theme_color": "#424874",
+	"orientation": "portrait-primary",
+	"icons": [
+		{
+			"src": "/img/icon-16-16.png",
+			"type": "image/png",
+			"sizes": "16x16"
+		},
+		{
+			"src": "/img/icon-32-32.png",
+			"type": "image/png",
+			"sizes": "32x32"
+		},
+		{
+			"src": "/img/icon-48-48.png",
+			"type": "image/png",
+			"sizes": "48x48"
+		},
+		{
+			"src": "/img/icon-64-64.png",
+			"type": "image/png",
+			"sizes": "64x64"
+		},
+		{
+			"src": "/img/icon-90-90.png",
+			"type": "image/png",
+			"sizes": "90x90"
+		},
+		{
+			"src": "/img/icon-128-128.png",
+			"type": "image/png",
+			"sizes": "128x128"
+		},
+		{
+			"src": "/img/icon-256-256.png",
+			"type": "image/png",
+			"sizes": "256x256"
+		},
+		{
+			"src": "/img/icon-512-512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	]
 }
