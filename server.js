@@ -13,17 +13,9 @@ const path = require('path');
 		const app = express();
 		app.use(cors());
 
-		if (process.env.NODE_ENV === 'production') {
-			app.get('/', (req, res) => {
-				res
-					.status(200)
-					.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-			});
-		} else {
-			app.get('/', (req, res) => {
-				res.status(200).send('Hello World');
-			});
-		}
+		app.get('/', (req, res) => {
+			res.status(200).send('Hello World');
+		});
 
 		app.listen(process.env.PORT, () => {
 			console.log(
