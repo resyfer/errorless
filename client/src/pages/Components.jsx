@@ -23,7 +23,13 @@ const Components = props => {
 			<Button name='Hello' link='/' />
 			<br />
 			<br />
-			<Input placeholder='Hello' setValue={setInputValue} />
+			<Input
+				placeholder='Hello'
+				label='World'
+				type='text'
+				name='user'
+				value={{ setInputValue, inputValue }}
+			/>
 			<br />
 			Value: {inputValue}
 		</div>

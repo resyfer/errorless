@@ -1,18 +1,22 @@
 //* CSS
-import './css/Button.scss';
+import './css/Input.scss';
 
 const Input = props => {
-	const setValue = props.setValue;
-
 	return (
-		<>
+		<div className='input-ctnr'>
 			<input
-				type='text'
-				placeholder={props.placeholder}
-				onChange={e => setValue(e.target.value)}
+				className='input'
+				for={props.name}
+				type={props.type}
+				minLength='2'
+				onChange={e => props.value.setInputValue(e.target.value)}
 			/>
-			<label></label>
-		</>
+			{props.value.inputValue === '' && (
+				<label className='input-label' name={props.name}>
+					{props.placeholder}
+				</label>
+			)}
+		</div>
 	);
 };
 
