@@ -1,44 +1,51 @@
-import { Link } from "react-router-dom";
+import { useContext } from 'react';
+import UserContext from '../context/UserContext';
+
+import { Link } from 'react-router-dom';
 
 //* CSS
-import "./css/Navbar.scss";
+import './css/Navbar.scss';
 
 //* Components import
-import Button from "./Button";
+import Button from './Button';
 
-const Navbar = (props) => {
-  return (
-    <div className="navbar">
-      <div className="navbar-left">
-        <ul>
-          <li>
-            <Link to="/">
-              <img src="/img/logo.png" alt="Errorless" />
-            </Link>
-          </li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/components">Components</Link>
-          </li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-        </ul>
-      </div>
-      <div className="navbar-right">
-        <ul>
-          <li>
-            <Button name="Signin/Signup" link="/auth" />
-          </li>
-        </ul>
-      </div>
-    </div>
-  );
+//! Temporary
+const user = {
+	id: 'abcd',
+	organisation: {
+		id: '1234',
+	},
+};
+
+const Navbar = props => {
+	// const {user, loggedIn} = useContext(UserContext);
+	const { loggedIn } = useContext(UserContext);
+
+	return (
+		<div className='navbar'>
+			<Link to={`/user/${user.id}`} className='logo-link'>
+				<img src='/img/logo.png' className='logo' alt='Errorless' />
+			</Link>
+			<ul className='nav-items-ctnr'>
+				<li>
+					<Link to={`/user/${user.id}`}>Home</Link>
+				</li>
+				<li>
+					<Link to={`/institute/${user.organisation.id}`}>Institute</Link>
+				</li>
+				<li>
+					<Link to='/team'>About Us</Link>
+				</li>
+			</ul>
+			<ul>
+				{!loggedIn && (
+					<li>
+						<Button name='Login / Sign Up' link='/auth' />
+					</li>
+				)}
+			</ul>
+		</div>
+	);
 };
 
 export default Navbar;
