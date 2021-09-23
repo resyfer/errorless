@@ -11,13 +11,13 @@ import Home from "./pages/Home";
 import Components from "./pages/Components";
 import Auth from "./pages/Auth";
 import Institute from "./pages/Institute";
+import Profile from "./pages/Profile";
 
 //* Components
 import Navbar from "./components/Navbar";
 
 //* CSS
 import "./App.scss";
-import Profile from "./pages/Profile";
 
 function App() {
   const jwt = Cookies.get("jwt");
@@ -32,30 +32,42 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    console.log(window.location);
+    if (loggedIn && window.location.pathname === "/") {
+      // window.location.replace(`/institute/${user.organisation.id}`);
+      window.location.replace(`/institute/${user._id}`);
+    }
+    // eslint-disable-next-line
+  }, [loggedIn]);
+
   return (
     <div className="App">
       <UserContext.Provider
         value={{ user, setUser, loggedIn, setLoggedIn, jwt }}
       >
         <Router>
-          <Navbar />
           <Switch>
             <Route exact path="/">
-              <Home title="Errorless" />
+              <Home title="CoLive-21" />
             </Route>
             <Route exact path="/components">
-              <Components title="Components | Errorless" />
+              <Navbar />
+              <Components title="Components | CoLive-21" />
             </Route>
 
             <Route exact path="/auth">
-              <Auth title="Auth | Errorless" />
+              <Navbar />
+              <Auth title="Auth | CoLive-21" />
             </Route>
 
             <Route path="/institute/:id">
+              <Navbar />
               <Institute />
             </Route>
 
             <Route path="/user/:id">
+              <Navbar />
               <Profile />
             </Route>
           </Switch>

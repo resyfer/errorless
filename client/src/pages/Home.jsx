@@ -1,35 +1,39 @@
 //* React
-import { useEffect } from "react";
+import { useEffect, useContext } from 'react';
 
 //! Temporary
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import Button from "../components/Button";
+import UserContext from '../context/UserContext';
 
-import "./css/Home.scss";
+import Button from '../components/Button';
 
-const Home = (props) => {
-  //* Set Title
-  useEffect(() => {
-    document.title = props.title;
-  }, [props.title]);
+import './css/Home.scss';
 
-  return (
-    <div className="home">
-      <div className="logo">
-        <img src="/img/logo.png" alt="Errorless" />
-      </div>
-      <div className="title">
-        <h1>Errorless</h1>
-        <h2>Helping breathe in happiness, not COVID-19</h2>
-      </div>
+const Home = props => {
+	const { loggedIn } = useContext(UserContext);
 
-      {/* !Temporary */}
-      <Link to="institute/1234">Home</Link>
+	//* Set Title
+	useEffect(() => {
+		document.title = props.title;
+	}, [props.title]);
 
-      <Button name="Login / Sign Up" link="/auth" />
-    </div>
-  );
+	return (
+		<div className='home'>
+			<div className='logo'>
+				<img src='/img/logo.png' alt='CoLive-21' />
+			</div>
+			<div className='title'>
+				<h1>CoLive-21</h1>
+				<h2>Helping breathe in happiness, not COVID-19</h2>
+			</div>
+
+			{/* !Temporary */}
+			<Link to='institute/1234'>Home</Link>
+
+			{!loggedIn && <Button name='Login / Sign Up' link='/auth' />}
+		</div>
+	);
 };
 
 export default Home;

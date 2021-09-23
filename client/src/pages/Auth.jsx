@@ -175,8 +175,8 @@ const Auth = (props) => {
           />
           <p className="authMsg" onClick={handleClick}>
             {isSignin
-              ? "Already have an account? Signin"
-              : "New to errorless? Signup"}
+              ? "Already have an account ? Signin"
+              : "New to CoLive-21 ? Signup"}
           </p>
         </div>
       </div>

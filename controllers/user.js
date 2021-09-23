@@ -41,6 +41,7 @@ module.exports.signup = async (req, res) => {
       password: hashedPassword,
     });
     const user = await newUser.save();
+    console.log(user);
     const token = jwt.sign(
       {
         email: user.email,
