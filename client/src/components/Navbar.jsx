@@ -37,13 +37,7 @@ const Navbar = props => {
 					<Link to='/team'>About Us</Link>
 				</li>
 			</ul>
-			<ul>
-				{!loggedIn && (
-					<li>
-						<Button name='Login / Sign Up' link='/auth' />
-					</li>
-				)}
-			</ul>
+			{!loggedIn && <Button name='Login / Sign Up' link='/auth' />}
 		</div>
 	);
 };
