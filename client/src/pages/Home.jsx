@@ -1,19 +1,19 @@
 //* React
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-const Home = props => {
-	//* Set Title
-	useEffect(() => {
-		document.title = props.title;
-	}, [props.title]);
+const Home = (props) => {
+  //* Set Title
+  useEffect(() => {
+    document.title = props.title;
+  }, [props.title]);
 
-	return (
-		<div className='home'>
-			Home
-			<br />
-			Page
-		</div>
-	);
+  return (
+    <main className="home">
+      Home
+      <br />
+      Page
+    </main>
+  );
 };
 
 export default Home;
