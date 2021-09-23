@@ -1,0 +1,54 @@
+@media screen and (min-width: 500px) {
+	div.input-ctnr {
+		position: relative;
+		margin: 1vh;
+		width: 40vh;
+		height: 6vh;
+
+		label.input-label {
+			position: absolute;
+			left: 1vh;
+			top: 50%;
+			transform: translate(0, -50%);
+			z-index: 1;
+			pointer-events: none;
+			font-size: 2.4vh;
+			color: var(--theme-4-100);
+		}
+
+		input.input {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			height: 100%;
+			width: 100%;
+			padding: 3vh 1vh;
+			box-sizing: border-box;
+			outline: 0;
+			color: var(--theme-4-100);
+			font-size: 2.4vh;
+			background-color: var(--theme-1-100);
+			border: 0.3vh solid var(--theme-3-100);
+			border-radius: 0.75vh;
+
+			&:focus,
+			&:hover {
+				border: 0.5vh solid var(--theme-4-100);
+				transition: {
+					timing-function: ease-out;
+					duration: 0.2s;
+				}
+			}
+		}
+
+		input:focus + label.input-label,
+		input:hover + label.input-label {
+			opacity: 0;
+			transition: {
+				timing-function: ease-out;
+				duration: 0.2s;
+			}
+		}
+	}
+}

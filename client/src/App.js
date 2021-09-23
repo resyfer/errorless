@@ -8,6 +8,7 @@ import UserContext from "./context/UserContext";
 //* Pages
 import Home from "./pages/Home";
 import Components from "./pages/Components";
+import Auth from "./pages/Auth";
 
 //* Components
 import Navbar from "./components/Navbar";
@@ -30,6 +31,9 @@ function App() {
             </Route>
             <Route exact path="/components">
               <Components title="Components | Errorless" />
+            </Route>
+            <Route exact path="/auth">
+              <Auth title="Auth | Errorless" />
             </Route>
           </Switch>
         </Router>

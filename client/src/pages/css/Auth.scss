@@ -1,0 +1,23 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .authCard {
+    width: 80vw;
+    box-shadow: 2px 2px 20px rgb(204, 204, 204);
+    border-radius: 12px;
+
+    .authForm {
+      width: 80%;
+      margin: auto;
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .authMsg {
+    cursor: pointer;
+  }
+}

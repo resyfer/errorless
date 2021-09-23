@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 //* CSS
 import "./css/Navbar.scss";
 
+//* Components import
+import Button from "./Button";
+
 const Navbar = (props) => {
   return (
     <div className="navbar">
@@ -30,9 +33,7 @@ const Navbar = (props) => {
       <div className="navbar-right">
         <ul>
           <li>
-            <Link to="/auth" className="navBtn">
-              Authenticate
-            </Link>
+            <Button name="Signin/Signup" link="/auth" />
           </li>
         </ul>
       </div>
