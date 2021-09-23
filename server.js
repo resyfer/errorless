@@ -3,6 +3,7 @@ require('dotenv').config({ path: './config/.env' });
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
 
 (async () => {
 	try {
@@ -12,9 +13,17 @@ const mongoose = require('mongoose');
 		const app = express();
 		app.use(cors());
 
-		app.get('/', (req, res) => {
-			res.status(200).send('Hello World');
-		});
+		if (process.env.NODE_ENV === 'production') {
+			app.get('/', (req, res) => {
+				res
+					.status(200)
+					.send(path.resolve(__dirname, 'client', 'build', 'index.html'));
+			});
+		} else {
+			app.get('/', (req, res) => {
+				res.status(200).send('Hello World');
+			});
+		}
 
 		app.listen(process.env.PORT, () => {
 			console.log(
