@@ -48,7 +48,7 @@ span.bold {
 }
 
 main {
-	height: calc(100vh - var(--navbar-pc-height));
+	min-height: calc(100vh - var(--navbar-pc-height));
 	margin-top: var(--navbar-pc-height);
-	padding: 2rem 4rem;
+	padding: 2rem;
 }

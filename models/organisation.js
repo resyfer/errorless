@@ -23,6 +23,7 @@ const orgSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	status: [Number],
 	crew: [mongoose.SchemaTypes.ObjectId],
 });
 
