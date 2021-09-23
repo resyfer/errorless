@@ -1,0 +1,33 @@
+User:
+  ID
+  Name
+  Email
+  Password (Hashed)
+  Photo (Link)
+  Status => Alive/Infected/Dead
+  History => [History events]
+  Vaccination Status => [Dose] => .length == 0 => Not vacc., .length == 1, 2 => Vaccinated
+  Organisation => {
+    [Org ID]
+    Name
+    User Designation
+  }
+
+Org:
+  ID
+  Name
+  Email
+  Photo (Link) 
+  Description
+  Password (Hashed)
+  Crew: [{User ID}]
+
+
+Features : 
+Pie Chart for Org Data (https://www.npmjs.com/package/react-minimal-pie-chart)
+
+If Org => bans user ==> Banned list: +email
+
+Org has complete power over User (except pswd)
+
+QR code for someone to go to user's profile (https://www.npmjs.com/package/react-qr-code)
