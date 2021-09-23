@@ -22,3 +22,24 @@
 	--theme-3-100: #a6b1e1;
 	--theme-4-100: #424874;
 }
+
+/**Apply For All**/
+* {
+	margin: 0;
+	padding: 0;
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: var(--theme-1-100);
+}
+
+a.btn {
+	text-decoration: none;
+	color: var(--theme-1-100);
+}
+
+span.bold {
+	color: var(--theme-4-100) !important;
+	font-weight: bolder;
+}
