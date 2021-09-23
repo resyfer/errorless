@@ -17,7 +17,7 @@ const path = require('path');
 			app.get('/', (req, res) => {
 				res
 					.status(200)
-					.send(path.resolve(__dirname, 'client', 'build', 'index.html'));
+					.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 			});
 		} else {
 			app.get('/', (req, res) => {
