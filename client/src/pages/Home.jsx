@@ -1,14 +1,18 @@
 //* React
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 
 //! Temporary
 import { Link } from 'react-router-dom';
+
+import UserContext from '../context/UserContext';
 
 import Button from '../components/Button';
 
 import './css/Home.scss';
 
 const Home = props => {
+	const { loggedIn } = useContext(UserContext);
+
 	//* Set Title
 	useEffect(() => {
 		document.title = props.title;
@@ -27,7 +31,7 @@ const Home = props => {
 			{/* !Temporary */}
 			<Link to='institute/1234'>Home</Link>
 
-			<Button name='Login / Sign Up' link='/auth' />
+			{!loggedIn && <Button name='Login / Sign Up' link='/auth' />}
 		</div>
 	);
 };

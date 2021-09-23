@@ -21,7 +21,7 @@ const user = {
 
 const Navbar = props => {
 	// const {user, loggedIn} = useContext(UserContext);
-	const { loggedIn, setLoggedIn, setUser } = useContext(UserContext);
+	const { loggedIn, setLoggedIn, user, setUser } = useContext(UserContext);
 	const history = useHistory();
 
 	const handleLogout = () => {
@@ -30,26 +30,28 @@ const Navbar = props => {
 			Cookies.remove('jwt');
 			setLoggedIn(false);
 			setUser(null);
-			history.push('/auth');
+			history.push('/');
 		}
 	};
-
+	console.log(user);
 	return (
 		<div className='navbar'>
-			<Link to={`/user/${user.id}`} className='logo-link'>
+			<Link to={loggedIn ? `/user/${user._id}` : '/'} className='logo-link'>
 				<img src='/img/logo.png' className='logo' alt='CoLive-21' />
 			</Link>
-			<ul className='nav-items-ctnr'>
-				<li>
-					<Link to={`/user/${user.id}`}>Home</Link>
-				</li>
-				<li>
-					<Link to={`/institute/${user.organisation.id}`}>Institute</Link>
-				</li>
-				<li>
-					<Link to='/team'>About Us</Link>
-				</li>
-			</ul>
+			{loggedIn && (
+				<ul className='nav-items-ctnr'>
+					<li>
+						<Link to='/institute'>Institute</Link>
+					</li>
+					<li>
+						<Link to='/profile'>Profile</Link>
+					</li>
+					<li>
+						<Link to='/team'>About Us</Link>
+					</li>
+				</ul>
+			)}
 			{loggedIn ? (
 				<NoLinkButton name='Logout' onClick={handleLogout} />
 			) : (

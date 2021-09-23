@@ -31,25 +31,36 @@ function App() {
 		}
 	}, []);
 
+	useEffect(() => {
+		console.log(window.location);
+		if (loggedIn && window.location.pathname === '/') {
+			// window.location.replace(`/institute/${user.organisation.id}`);
+			window.location.replace(`/user/${user._id}`);
+		}
+		// eslint-disable-next-line
+	}, [loggedIn]);
+
 	return (
 		<div className='App'>
 			<UserContext.Provider
 				value={{ user, setUser, loggedIn, setLoggedIn, jwt }}>
 				<Router>
-					<Navbar />
 					<Switch>
 						<Route exact path='/'>
 							<Home title='CoLive-21' />
 						</Route>
 						<Route exact path='/components'>
+							<Navbar />
 							<Components title='Components | CoLive-21' />
 						</Route>
 
 						<Route exact path='/auth'>
+							<Navbar />
 							<Auth title='Auth | CoLive-21' />
 						</Route>
 
 						<Route path='/institute/:id'>
+							<Navbar />
 							<Institute />
 						</Route>
 					</Switch>
