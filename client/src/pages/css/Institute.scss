@@ -59,9 +59,42 @@
 			}
 		}
 
+		div.chart {
+			display: flex;
+			flex-direction: row;
+
+			div.pie-chart {
+				height: 50vh;
+				width: 50%;
+			}
+
+			div.legend {
+				margin-left: 3vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+
+				div.legend-itm {
+					margin-bottom: 3vh;
+					display: flex;
+
+					div.legend-color {
+						height: 3vh;
+						width: 3vh;
+						margin-right: 3vh;
+					}
+
+					div.legend-label {
+						font-weight: bold;
+						color: var(--theme-4-100);
+					}
+				}
+			}
+		}
+
 		div.heading {
 			text-align: center;
-			margin: 6vh auto 1vh auto;
+			margin: 6vh auto 3vh auto;
 			width: 50%;
 			font-size: 3vh;
 			color: var(--theme-4-100);

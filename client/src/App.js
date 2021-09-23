@@ -28,21 +28,23 @@ function App() {
 			<UserContext.Provider
 				value={{ user, setUser, loggedIn, setLoggedIn, jwt }}>
 				<Router>
-					<Navbar />
 					<Switch>
 						<Route exact path='/'>
 							<Home title='Errorless' />
 						</Route>
 
 						<Route exact path='/components'>
+							<Navbar />
 							<Components title='Components | Errorless' />
 						</Route>
 
 						<Route exact path='/auth'>
+							<Navbar />
 							<Auth title='Auth | Errorless' />
 						</Route>
 
 						<Route path='/institute/:id'>
+							<Navbar />
 							<Institute />
 						</Route>
 					</Switch>
