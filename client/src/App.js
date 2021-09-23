@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //* Dependencies
+import Cookies from "js-cookie";
 import UserContext from "./context/UserContext";
 
 //* Pages
@@ -17,12 +18,15 @@ import Navbar from "./components/Navbar";
 import "./App.scss";
 
 function App() {
+  const jwt = Cookies.get("jwt");
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ user, setUser, loggedIn, setLoggedIn }}>
+      <UserContext.Provider
+        value={{ user, setUser, loggedIn, setLoggedIn, jwt }}
+      >
         <Router>
           <Navbar />
           <Switch>
@@ -32,6 +36,7 @@ function App() {
             <Route exact path="/components">
               <Components title="Components | Errorless" />
             </Route>
+
             <Route exact path="/auth">
               <Auth title="Auth | Errorless" />
             </Route>

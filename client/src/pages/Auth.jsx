@@ -7,8 +7,6 @@ import "./css/Auth.scss";
 import Button from "../components/Button";
 import Input from "../components/Input";
 
-import { Link } from "react-router-dom";
-
 const Auth = () => {
   const [isSignin, setIsSignin] = useState(false);
   const [name, setName] = useState("");
