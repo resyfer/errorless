@@ -19,6 +19,8 @@ const emailRe =
 // eslint-disable-next-line
 const phoneRe = /^[0-9]{10}$/;
 
+const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const ProfileEdit = (props) => {
@@ -30,6 +32,9 @@ const ProfileEdit = (props) => {
   const [email, setEmail] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [prevPassword, setPrevPassword] = useState("");
 
   const [error, setError] = useState("");
 
@@ -42,8 +47,8 @@ const ProfileEdit = (props) => {
     if (loggedIn) {
       user.name && setName(user.name);
       user.email && setEmail(user.email);
-      user.photo && setName(user.name);
-      user.phoneNo && setName(user.phoneNo);
+      user.photo && setPhotoUrl(user.photo);
+      user.phoneNo && setPhoneNo(user.phoneNo);
     }
     // eslint-disable-next-line
   }, [loggedIn]);
@@ -55,15 +60,47 @@ const ProfileEdit = (props) => {
 
   useEffect(() => {
     setError("");
-  }, [email, phoneNo, photoUrl, name]);
+  }, [email, phoneNo, photoUrl, name, password, confirmPassword, prevPassword]);
 
   const handleSubmit = () => {
     if (phoneNo.length !== 0 && !phoneRe.test(phoneNo)) {
       setError("Enter valid phone number");
+    } else if (password.length > 0 && !passwordRe.test(password)) {
+      setError(
+        "Password must contain atleast 8 characters, 1 special character and 1 number"
+      );
+    } else if (password.length > 0 && password !== confirmPassword) {
+      setError("Password and Confirm password doesn't match");
+    } else if (password.length > 0 && prevPassword.length === 0) {
+      setError("Please enter your previous password");
     } else if (!emailRe.test(email)) {
       setError("Enter valid email");
     } else if (name.length <= 0) {
       setError("Please enter your name");
+    } else if (password.length > 0) {
+      const userData = {
+        ...user,
+        phoneNo,
+        email,
+        photo: photoUrl,
+        name,
+        prevPassword,
+        password,
+        confirmPassword,
+      };
+      axios
+        .put(`${apiUrl}/user/${user._id}`, userData)
+        .then((res) => {
+          if (!res.data.success) {
+            setError(res.data.message);
+          } else {
+            Cookies.set("user", JSON.stringify(res.data.user));
+            window.location.replace(`/user/${user._id}`);
+          }
+        })
+        .catch((err) => {
+          setError(err.message);
+        });
     } else {
       const userData = {
         ...user,
@@ -83,7 +120,7 @@ const ProfileEdit = (props) => {
           }
         })
         .catch((err) => {
-          setError(err);
+          setError(err.message);
         });
     }
   };
@@ -121,6 +158,31 @@ const ProfileEdit = (props) => {
           name="number"
           value={[phoneNo, setPhoneNo]}
         />
+        <Input
+          placeholder="Change Password"
+          label="Change Password"
+          type="password"
+          name="password"
+          value={[password, setPassword]}
+        />
+        {password != "" && (
+          <>
+            <Input
+              placeholder="Confirm New Password"
+              label="Confirm Password"
+              type="password"
+              name="newpassword"
+              value={[confirmPassword, setConfirmPassword]}
+            />
+            <Input
+              placeholder="Enter Current Password"
+              label="Current Password"
+              type="password"
+              name="prevPassword"
+              value={[prevPassword, setPrevPassword]}
+            />
+          </>
+        )}
         <NoLinkButton name="Save" onClick={handleSubmit} />
       </div>
     </main>

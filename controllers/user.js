@@ -203,7 +203,7 @@ module.exports.editDetails = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.json({ success: false, message: err });
+    res.json({ success: false, message: "Internal server error" });
   }
 };
 
