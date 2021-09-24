@@ -14,7 +14,7 @@ const About = (props) => {
             rel="noreferrer"
             href="https://www.github.com/resyfer"
           >
-            <i class="fab fa-github"></i>
+            <i className="fab fa-github"></i>
           </a>
         </div>
         <div className="teamImg">
@@ -26,7 +26,7 @@ const About = (props) => {
             rel="noreferrer"
             href="https://www.github.com/codadept"
           >
-            <i class="fab fa-github"></i>
+            <i className="fab fa-github"></i>
           </a>
         </div>
       </div>

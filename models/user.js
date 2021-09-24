@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Healthy", "Infected", "Missing in Action"],
+      enum: ["Healthy", "Infected", "Missing In Action"],
       default: "Healthy",
     },
     phoneNo: {

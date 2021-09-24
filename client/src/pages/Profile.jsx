@@ -75,9 +75,27 @@ const Profile = () => {
                 <i className="fas fa-university"></i>{" "}
                 {profileUser?.organisation?.name}
               </p>
-              <p className="profileUserVaccStatus">
+              <p
+                className="profileUserVaccStatus"
+                style={{
+                  color:
+                    profileUser?.vaccinationStatus === 0
+                      ? "red"
+                      : profileUser?.vaccinationStatus === 1
+                      ? "orange"
+                      : "green",
+                }}
+              >
                 {profileUser.vaccinationStatus !== null &&
                   vaccinationStatus[profileUser.vaccinationStatus]}
+              </p>
+              <p
+                className="profileUserStatus"
+                style={{
+                  color: profileUser?.status === "Healthy" ? "green" : "red",
+                }}
+              >
+                {profileUser.status !== null && profileUser.status}
               </p>
               {profileUser._id === user._id && (
                 <>
@@ -128,22 +146,25 @@ const Profile = () => {
                   </div>
                 ))}
             </div>
-            <div className="addHistory">
-              <NoLinkButton
-                name="+"
-                onClick={() => {
-                  setAddHistory({
-                    date: new Date(),
-                    event: addHistoryInput.current.value,
-                  });
-                }}
-              />
-              <input
-                type="text"
-                placeholder="Add History Event"
-                ref={addHistoryInput}
-              />
-            </div>
+
+            {profileUser._id === user._id && (
+              <div className="addHistory">
+                <NoLinkButton
+                  name="+"
+                  onClick={() => {
+                    setAddHistory({
+                      date: new Date(),
+                      event: addHistoryInput.current.value,
+                    });
+                  }}
+                />
+                <input
+                  type="text"
+                  placeholder="Add History Event"
+                  ref={addHistoryInput}
+                />
+              </div>
+            )}
           </div>
         </div>
       )}

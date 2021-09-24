@@ -38,6 +38,11 @@ const ProfileEdit = (props) => {
   const [prevPassword, setPrevPassword] = useState("");
   const [vaccinationStatus, setVaccinationStatus] = useState("");
   const [status, setStatus] = useState("");
+  const [organisation, setOrganisation] = useState({
+    orgId: "",
+    name: "",
+    designation: "",
+  });
 
   const [error, setError] = useState("");
 
@@ -56,6 +61,7 @@ const ProfileEdit = (props) => {
         setDesignation(user.organisation.designation);
       user.vaccinationStatus && setVaccinationStatus(user.vaccinationStatus);
       user.status && setStatus(user.status);
+      user.organisation && setOrganisation(user.organisation);
     }
     // eslint-disable-next-line
   }, [loggedIn]);
@@ -76,7 +82,12 @@ const ProfileEdit = (props) => {
     password,
     confirmPassword,
     prevPassword,
+    designation,
   ]);
+
+  useEffect(() => {
+    setOrganisation((prev) => ({ ...prev, designation }));
+  }, [designation]);
 
   const handleSubmit = () => {
     if (phoneNo.length !== 0 && !phoneRe.test(phoneNo)) {
@@ -93,6 +104,8 @@ const ProfileEdit = (props) => {
       setError("Enter valid email");
     } else if (name.length <= 0) {
       setError("Please enter your name");
+    } else if (organisation.designation.length <= 0) {
+      setError("Enter proper designation");
     } else if (password.length > 0) {
       const userData = {
         ...user,
@@ -103,6 +116,9 @@ const ProfileEdit = (props) => {
         prevPassword,
         password,
         confirmPassword,
+        organisation,
+        vaccinationStatus,
+        status,
       };
       axios
         .put(`${apiUrl}/user/${user._id}`, userData)
@@ -125,6 +141,9 @@ const ProfileEdit = (props) => {
         email,
         photo: photoUrl,
         name,
+        organisation,
+        vaccinationStatus,
+        status,
       };
       axios
         .put(`${apiUrl}/user/${user._id}`, userData)

@@ -144,6 +144,7 @@ module.exports.editDetails = async (req, res) => {
     status,
     _id,
     email,
+    organisation,
   } = req.body;
 
   const { userId } = req.params;
@@ -204,6 +205,7 @@ module.exports.editDetails = async (req, res) => {
               status,
               history,
               email,
+              organisation,
             },
             { new: true }
           );
@@ -222,10 +224,13 @@ module.exports.editDetails = async (req, res) => {
           status,
           history,
           email,
+          organisation,
         },
         { new: true }
       );
       const user = await updatedUser.save();
+      console.log(user);
+      console.log(organisation);
       res.json({ success: true, user });
     }
   } catch (err) {
