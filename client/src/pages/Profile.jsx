@@ -5,6 +5,7 @@ import UserContext from "../context/UserContext";
 import NoLinkButton from "../components/NoLinkButton";
 
 import "./css/Profile.scss";
+import axios from "axios";
 
 const Profile = (props) => {
   const { user, loggedIn } = useContext(UserContext);
@@ -36,12 +37,12 @@ const Profile = (props) => {
             />
           </div>
           <div className="profileDetails">
-            <p className="profileUserName">Pratik Majumdar</p>
+            <p className="profileUserName">{user?.name}</p>
             <p className="profileUserEmail">
-              <i className="fas fa-envelope"></i> info.pratikmajumdar@gmail.com
+              <i className="fas fa-envelope"></i> {user?.email}
             </p>
             <p className="profileUserPhone">
-              <i className="fas fa-phone"></i> 9101453497
+              <i className="fas fa-phone"></i> {user?.phoneNo}
             </p>
             <p className="profileUserDesg">Student</p>
             <p className="profileUseOrg">
