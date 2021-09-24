@@ -239,6 +239,41 @@ module.exports.editDetails = async (req, res) => {
   }
 };
 
+// Get all history of a user
+
+module.exports.getAllHistory = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const userData = await User.findById(userId);
+    if (userData) {
+      const history = userData.history;
+      res.json({ success: true, history });
+      console.log(history);
+    }
+  } catch (err) {
+    res.json({ success: false, message: "Internal server error" });
+  }
+};
+
+// update history of user
+
+module.exports.updateHistory = async (req, res) => {
+  const { userId, history } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { history },
+      { new: true }
+    );
+    const updatedUser = await user.save();
+    console.log(updatedUser);
+    res.json({ success: true, user: updatedUser });
+  } catch (err) {
+    console.log(err);
+    res.json({ success: false, message: "Internal server error" });
+  }
+};
+
 module.exports.users = async (req, res) => {
   const users = await User.find();
   res.json({

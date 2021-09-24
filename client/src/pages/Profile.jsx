@@ -8,14 +8,15 @@ import NoLinkButton from "../components/NoLinkButton";
 
 import axios from "axios";
 import QRCode from "qrcode.react";
+import Cookies from "js-cookie";
 
 import "./css/Profile.scss";
 
 const Profile = () => {
   const { user, loggedIn } = useContext(UserContext);
   const [profileUser, setProfileUser] = useState();
-  const [addHistory, setAddHistory] = useState();
   const [showQR, setShowQR] = useState(false);
+  const userHistories = [];
 
   const history = useHistory();
   const location = useLocation();
@@ -23,7 +24,7 @@ const Profile = () => {
   const addHistoryInput = useRef();
 
   useEffect(() => {
-    document.title = profileUser?.name + " | CoLive-21";
+    document.title = (profileUser?.name || "User") + " | CoLive-21";
   }, [profileUser?.name]);
 
   useEffect(() => {
@@ -43,6 +44,39 @@ const Profile = () => {
       history.push(`/user/${user._id}`);
     }
   }, [location]);
+
+  useEffect(() => {
+    if (profileUser && profileUser?._id === user._id) {
+      // fetch user history
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/user/${user._id}/history`)
+        .then((res) => {
+          if (res.data.success) {
+            userHistories.push(...res.data.history);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [profileUser]);
+
+  const handleAddHistory = () => {
+    userHistories.push({
+      date: new Date(),
+      event: addHistoryInput.current.value,
+    });
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/user/${user._id}/history`, {
+        userId: user._id,
+        history: userHistories,
+      })
+      .then((res) => {
+        if (res.data.success) {
+          Cookies.set("user", JSON.stringify(res.data.user));
+          window.location.replace(`/user/${user._id}`);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <main className="profile">
@@ -149,15 +183,7 @@ const Profile = () => {
 
             {profileUser._id === user._id && (
               <div className="addHistory">
-                <NoLinkButton
-                  name="+"
-                  onClick={() => {
-                    setAddHistory({
-                      date: new Date(),
-                      event: addHistoryInput.current.value,
-                    });
-                  }}
-                />
+                <NoLinkButton name="+" onClick={handleAddHistory} />
                 <input
                   type="text"
                   placeholder="Add History Event"
