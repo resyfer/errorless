@@ -18,6 +18,10 @@ const ProfileEdit = props => {
 	const [email, setEmail] = useState('');
 	const [photoUrl, setPhotoUrl] = useState('');
 	const [phoneNo, setPhoneNo] = useState('');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		if (!loggedIn) history.push('/');
@@ -69,6 +73,22 @@ const ProfileEdit = props => {
 					name='number'
 					value={[phoneNo, setPhoneNo]}
 				/>
+				<Input
+					placeholder='Change Password'
+					label='Change Password'
+					type='password'
+					name='password'
+					value={[password, setPassword]}
+				/>
+				{password != '' && (
+					<Input
+						placeholder='Confirm New Password'
+						label='Confirm Password'
+						type='password'
+						name='newpassword'
+						value={[confirmPassword, setConfirmPassword]}
+					/>
+				)}
 				<NoLinkButton name='Save' />
 			</div>
 		</main>
