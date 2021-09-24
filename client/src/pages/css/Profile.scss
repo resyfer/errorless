@@ -108,6 +108,23 @@
           font-style: italic;
         }
       }
+
+      div.addHistory {
+        display: flex;
+
+        input {
+          width: 100%;
+          outline: none;
+          padding: 2vh 1vh;
+          box-sizing: border-box;
+          outline: 0;
+          color: var(--theme-4-100);
+          font-size: 2.4vh;
+          background-color: var(--theme-1-100);
+          border: 0.3vh solid var(--theme-3-100);
+          border-radius: 0.75vh;
+        }
+      }
     }
   }
 }

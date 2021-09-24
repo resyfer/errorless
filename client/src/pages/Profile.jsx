@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 import UserContext from "../context/UserContext";
@@ -10,12 +10,15 @@ import axios from "axios";
 
 import "./css/Profile.scss";
 
-const Profile = (props) => {
+const Profile = () => {
   const { user, loggedIn } = useContext(UserContext);
   const [profileUser, setProfileUser] = useState();
+  const [addHistory, setAddHistory] = useState();
 
   const history = useHistory();
   const location = useLocation();
+
+  const addHistoryInput = useRef();
 
   useEffect(() => {
     document.title = profileUser?.name + " | CoLive-21";
@@ -26,6 +29,8 @@ const Profile = (props) => {
   //     window.location.replace(`/`);
   //   }
   // }, [loggedIn]);
+
+  console.log(addHistory);
 
   useEffect(() => {
     const userId = window.location.pathname.split("/user/")[1];
@@ -106,6 +111,22 @@ const Profile = (props) => {
                     <time>{new Date(h.date).toLocaleString()}</time>
                   </div>
                 ))}
+            </div>
+            <div className="addHistory">
+              <NoLinkButton
+                name="+"
+                onClick={() => {
+                  setAddHistory({
+                    date: new Date(),
+                    event: addHistoryInput.current.value,
+                  });
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Add History Event"
+                ref={addHistoryInput}
+              />
             </div>
           </div>
         </div>
