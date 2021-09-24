@@ -98,7 +98,7 @@ const Profile = () => {
                       ></div>
                       <div className="profileModel">
                         <div className="profileModelContent">
-                          <QRCode size={200} value="https://www.google.com" />
+                          <QRCode size={200} value={window.location.href} />
                         </div>
                         <div className="profileModelAction">
                           <NoLinkButton
