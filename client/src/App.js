@@ -26,6 +26,7 @@ function App() {
   const jwt = Cookies.get("jwt");
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isOrg, setIsOrg] = useState(false);
 
   const redirectuser = useRef();
   useEffect(() => {
@@ -46,7 +47,7 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider
-        value={{ user, setUser, loggedIn, setLoggedIn, jwt }}
+        value={{ user, setUser, loggedIn, setLoggedIn, jwt, isOrg, setIsOrg }}
       >
         <Router>
           {user && <Link ref={redirectuser} to={`/user/${user._id}`} />}

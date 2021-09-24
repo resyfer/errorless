@@ -1,0 +1,38 @@
+@media screen and (min-width: 500px) {
+  main.org-auth {
+    div.heading {
+      text-align: center;
+      margin: 6vh auto 3vh auto;
+      width: 50%;
+      font-size: 3vh;
+      color: var(--theme-4-100);
+      border-bottom: 0.2vh solid var(--theme-4-100);
+      font-weight: bold;
+    }
+    div.org-auth-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    p.switch-forms {
+      margin-top: 3vh;
+      cursor: pointer;
+    }
+
+    textarea.org-desc {
+      resize: none;
+      padding: 1vh 1vh;
+      width: 40vh;
+      height: 20vh;
+      box-sizing: border-box;
+      outline: 0;
+      color: var(--theme-4-100);
+      font-size: 2.4vh;
+      background-color: var(--theme-1-100);
+      border: 0.3vh solid var(--theme-3-100);
+      border-radius: 0.75vh;
+    }
+  }
+}
