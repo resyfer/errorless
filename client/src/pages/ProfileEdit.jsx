@@ -112,6 +112,7 @@ const ProfileEdit = (props) => {
           } else {
             Cookies.set("user", JSON.stringify(res.data.user));
             window.location.replace(`/user/${user._id}`);
+            // history.push(`/user/${user._id}`);
           }
         })
         .catch((err) => {

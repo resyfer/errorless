@@ -161,6 +161,13 @@ module.exports.editDetails = async (req, res) => {
         message: "You don't have the permission to change details",
       });
     }
+    const userWithEmail = await User.findOne({ email });
+    if (!userWithEmail.password === foundUser.password) {
+      return res.json({
+        success: false,
+        message: "Email id exist in our database.",
+      });
+    }
     if (prevPassword) {
       const validPassword = await bcrypt.compare(
         prevPassword,

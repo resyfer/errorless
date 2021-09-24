@@ -14,13 +14,14 @@ import OrgAuth from "./pages/OrgAuth";
 import Institute from "./pages/Institute";
 import Profile from "./pages/Profile";
 import Organisation from "./pages/Organisation";
+import About from "./pages/About";
+import ProfileEdit from "./pages/ProfileEdit";
 
 //* Components
 import Navbar from "./components/Navbar";
 
 //* CSS
 import "./App.scss";
-import ProfileEdit from "./pages/ProfileEdit";
 
 function App() {
   const jwt = Cookies.get("jwt");
@@ -92,6 +93,11 @@ function App() {
             <Route exact path="/edit-profile">
               <Navbar />
               <ProfileEdit title="Edit Profile | CoLive-21" />
+            </Route>
+
+            <Route exact path="/team">
+              <Navbar />
+              <About title="About us | CoLive-21" />
             </Route>
           </Switch>
         </Router>
