@@ -50,11 +50,6 @@ const Navbar = () => {
             {!isOrg && <Link to={`/user/${user._id}`}>Profile</Link>}
             {isOrg && <Link to={`/manage`}>Manage</Link>}
           </li>
-          {!isOrg && (
-            <li>
-              <Link to="/update">Update</Link>
-            </li>
-          )}
           <li>
             <Link to="/team">About Us</Link>
           </li>

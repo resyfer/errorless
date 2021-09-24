@@ -27,7 +27,7 @@ const orgSchema = new mongoose.Schema({
     type: [Number],
     default: [0, 0, 0],
   },
-  crew: [mongoose.SchemaTypes.ObjectId],
+  crew: [mongoose.Schema.Types.ObjectId],
 });
 
 const orgModel = mongoose.model("org", orgSchema);

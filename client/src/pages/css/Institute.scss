@@ -106,7 +106,7 @@
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: center;
 
       div.member-card {
         width: 16rem;
@@ -119,6 +119,8 @@
         align-items: center;
         border-radius: 1.5vh;
         cursor: pointer;
+        margin-bottom: 3vh;
+        margin-right: 3vh;
 
         &:hover {
           box-shadow: 0 0 1.2vh 0.1vh var(--theme-3-100);

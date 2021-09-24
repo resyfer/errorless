@@ -14,7 +14,6 @@ import OrgAuth from "./pages/OrgAuth";
 import Institute from "./pages/Institute";
 import Profile from "./pages/Profile";
 import Organisation from "./pages/Organisation";
-import Status from "./pages/Status";
 import About from "./pages/About";
 import ProfileEdit from "./pages/ProfileEdit";
 
@@ -99,11 +98,6 @@ function App() {
             <Route exact path="/team">
               <Navbar />
               <About title="About us | CoLive-21" />
-            </Route>
-
-            <Route path="/update">
-              <Navbar />
-              <Status />
             </Route>
           </Switch>
         </Router>

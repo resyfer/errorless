@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const Org = require("../models/organisation");
 
 const emailRe =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -67,6 +68,14 @@ module.exports.signup = async (req, res) => {
       phoneNo,
     });
     const user = await newUser.save();
+
+    const org = await Org.findById(organisation.orgId);
+    org.crew.push(user._id);
+    org.markModified("crew");
+    org.status[0] = org.status[0] + 1;
+    org.markModified("status");
+    await org.save();
+
     const token = jwt.sign(
       {
         email: user.email,
