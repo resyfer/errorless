@@ -1,0 +1,112 @@
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .profileContainer {
+    height: 70vh;
+    width: 100%;
+    box-shadow: 2px 2px 20px rgb(195, 195, 195);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+
+    .profileLeft {
+      width: 40%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .profileImg,
+      .profileDetails {
+        width: 100%;
+        text-align: center;
+      }
+
+      img {
+        height: 12rem;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 4px 4px 10px rgb(199, 199, 199);
+      }
+
+      .profileDetails {
+        padding: 2rem 0;
+
+        p {
+          margin: 0.5rem;
+        }
+
+        .profileUserName {
+          font-size: 1.5rem;
+        }
+
+        .profileUserEmail,
+        .profileUserPhone {
+          font-size: 1rem;
+          opacity: 0.7;
+        }
+
+        .profileUserDesg {
+          font-size: 1.2rem;
+          font-style: italic;
+          margin-top: 2rem;
+        }
+
+        .profileUserOrg {
+          font-size: 1.2rem;
+        }
+
+        .profileUserVaccStatus {
+          margin-top: 2rem;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .profileRight {
+      width: 60%;
+      padding: 2rem;
+      margin: 4rem 0;
+      border-left: 2px solid rgba(119, 119, 119, 0.5);
+
+      .profileUserHistoryHeading {
+        font-size: 1.8rem;
+        opacity: 0.7;
+        margin-bottom: 1rem;
+      }
+
+      .profileUserHistoryOverflow {
+        height: 90%;
+        overflow-x: auto;
+      }
+
+      .profileUserHistory {
+        width: 100%;
+        padding: 2rem 1.2rem;
+        margin: 0.5rem 0;
+        box-shadow: 2px 2px 20px rgb(218, 218, 218);
+        border-radius: 12px;
+        position: relative;
+
+        span {
+          font-size: 1.2rem;
+
+          i {
+            margin-right: 2rem;
+          }
+        }
+
+        time {
+          position: absolute;
+          bottom: 15%;
+          right: 5%;
+          opacity: 0.6;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}

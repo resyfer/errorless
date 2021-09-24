@@ -1,6 +1,12 @@
 //* React
-import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import {
+	BrowserRouter as Router,
+	Link,
+	Route,
+	Switch,
+	useHistory,
+} from 'react-router-dom';
 
 //* Dependencies
 import Cookies from 'js-cookie';
@@ -11,6 +17,7 @@ import Home from './pages/Home';
 import Components from './pages/Components';
 import Auth from './pages/Auth';
 import Institute from './pages/Institute';
+import Profile from './pages/Profile';
 
 //* Components
 import Navbar from './components/Navbar';
@@ -23,6 +30,7 @@ function App() {
 	const [user, setUser] = useState(null);
 	const [loggedIn, setLoggedIn] = useState(false);
 
+	const redirectuser = useRef();
 	useEffect(() => {
 		const getUser = Cookies.get('user');
 		if (getUser) {
@@ -34,17 +42,19 @@ function App() {
 	useEffect(() => {
 		console.log(window.location);
 		if (loggedIn && window.location.pathname === '/') {
-			// window.location.replace(`/institute/${user.organisation.id}`);
-			window.location.replace(`/user/${user._id}`);
+			redirectuser.current.click();
 		}
 		// eslint-disable-next-line
 	}, [loggedIn]);
+
+	console.log(loggedIn);
 
 	return (
 		<div className='App'>
 			<UserContext.Provider
 				value={{ user, setUser, loggedIn, setLoggedIn, jwt }}>
 				<Router>
+					{user && <Link ref={redirectuser} to={`/user/${user._id}`} />}
 					<Switch>
 						<Route exact path='/'>
 							<Home title='CoLive-21' />
@@ -62,6 +72,11 @@ function App() {
 						<Route path='/institute/:id'>
 							<Navbar />
 							<Institute />
+						</Route>
+
+						<Route path='/user/:id'>
+							<Navbar />
+							<Profile />
 						</Route>
 					</Switch>
 				</Router>
