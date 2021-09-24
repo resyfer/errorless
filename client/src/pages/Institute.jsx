@@ -127,15 +127,31 @@ const Institute = () => {
 									className='member-card'
 									onClick={() => history.push(`/user/${user.id}`)}>
 									<div className='member-pic'>
-										<img src={user.img} alt={user.name} />
+										<img src={user.photo} alt={user.name} />
 									</div>
 									<div className='member-info'>
 										<div className='user-name'>{user.name}</div>
 										<div className='user-designation'>
 											{user.organisation.designation}
 										</div>
-										<div className='user-vac-status'>
+										<div
+											className='user-vac-status'
+											style={{
+												color:
+													user.vaccinationStatus == 2
+														? 'Green'
+														: user.vaccinationStatus == 1
+														? 'Blue'
+														: 'Red',
+											}}>
 											{vaccinationStatus[user.vaccinationStatus]}
+										</div>
+										<div
+											className='user-health-status'
+											style={{
+												color: user.status == 'Healthy' ? 'Green' : 'Red',
+											}}>
+											{user.status}
 										</div>
 									</div>
 								</div>

@@ -44,6 +44,7 @@ const ProfileEdit = props => {
 	return (
 		<main className='prof-edit'>
 			<div className='heading'>Edit User Profile</div>
+			{error && <div className='error'>{error}</div>}
 			<div className='card'>
 				<Input
 					placeholder='Name'
