@@ -1,7 +1,8 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const { instiDetails } = require('../controllers/org');
+const { instiDetails, getAllInsti } = require("../controllers/org");
 
-router.get('/:id', instiDetails);
+router.get("/", getAllInsti);
+router.get("/:id", instiDetails);
 
 module.exports = router;

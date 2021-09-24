@@ -29,16 +29,24 @@ const Profile = (props) => {
 
   useEffect(() => {
     const userId = window.location.pathname.split("/user/")[1];
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/user/${userId}`)
-      .then((res) => {
-        if (!res.data.success) {
-          history.push(`/institute/${user.organisation.orgId}`);
-        } else {
-          setProfileUser(res.data.user);
-        }
-      })
-      .catch();
+    if (userId) {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/user/${userId}`)
+        .then((res) => {
+          if (!res.data.success) {
+            history.push(`/institute/${user.organisation.orgId}`);
+          } else {
+            if (res.data.user.organisation.orgId === user.organisation.orgId) {
+              setProfileUser(res.data.user);
+            } else {
+              history.push(`/institute/${user.organisation.orgId}`);
+            }
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      history.push(`/user/${user._id}`);
+    }
   }, [location]);
 
   console.log(loggedIn);
