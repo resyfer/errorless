@@ -1,20 +1,27 @@
 @media screen and (min-width: 500px) {
-	main.prof-edit {
-		div.heading {
-			text-align: center;
-			margin: 6vh auto 3vh auto;
-			width: 50%;
-			font-size: 3vh;
-			color: var(--theme-4-100);
-			border-bottom: 0.2vh solid var(--theme-4-100);
-			font-weight: bold;
-		}
+  main.prof-edit {
+    div.heading {
+      text-align: center;
+      margin: 6vh auto 3vh auto;
+      width: 50%;
+      font-size: 3vh;
+      color: var(--theme-4-100);
+      border-bottom: 0.2vh solid var(--theme-4-100);
+      font-weight: bold;
+    }
 
-		div.card {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-		}
-	}
+    .editProfileError {
+      text-align: center;
+      color: rgb(250, 107, 107);
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    div.card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }

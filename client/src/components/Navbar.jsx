@@ -47,7 +47,7 @@ const Navbar = (props) => {
         <>
           <div className="user">
             <i
-              class="fas fa-user-edit"
+              className="fas fa-user-edit"
               onClick={() => history.push("/edit-profile")}
             ></i>
             <NoLinkButton name="Logout" onClick={handleLogout} />

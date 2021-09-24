@@ -56,7 +56,6 @@ module.exports.signup = async (req, res) => {
       password: hashedPassword,
     });
     const user = await newUser.save();
-    console.log(user);
     const token = jwt.sign(
       {
         email: user.email,
@@ -123,11 +122,12 @@ module.exports.editDetails = async (req, res) => {
     history,
     vaccinationStatus,
     status,
-    id,
+    _id,
+    email,
   } = req.body;
 
   const { userId } = req.params;
-  if (id !== userId) {
+  if (_id !== userId) {
     return res.json({
       success: false,
       message: "You don't have the permission to change details",
@@ -176,10 +176,11 @@ module.exports.editDetails = async (req, res) => {
               vaccinationStatus,
               status,
               history,
+              email,
             },
             { new: true }
           );
-          const user = updatedUser.save();
+          const user = await updatedUser.save();
           res.json({ success: true, user });
         }
       }
@@ -193,10 +194,11 @@ module.exports.editDetails = async (req, res) => {
           vaccinationStatus,
           status,
           history,
+          email,
         },
         { new: true }
       );
-      const user = updatedUser.save();
+      const user = await updatedUser.save();
       res.json({ success: true, user });
     }
   } catch (err) {

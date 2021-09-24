@@ -32,7 +32,7 @@ const Profile = (props) => {
                 src={
                   user?.photo
                     ? user?.photo
-                    : "https://lh3.googleusercontent.com/pw/AM-JKLX0vd9Yl2LyvRpvgpdN5jLFbQgkn2bGdZ9dCzb2kbSAUGg78c3S6MqyccIaEg48Cz5q77DsKIuLbyhdLk0Sg5yzVO6Ohgnth1VKlN4-cKuewTazq9U-wPoGu8QafcdH3YH5E8H11UBHU4x6ouyuexkj=s225-no"
+                    : "https://lh3.googleusercontent.com/pw/AM-JKLUYXZMkLSuQHENLROTjKQLYnzNZt7Q4rkmdtAyBtGJfNW32w1k6jaTC2Oju7xHORmlTRTOiyyuhewCM10hpS9Rt4BQeIk3WJ7MHzlFpozHx3KXGdAHHV9vEq2XmeOERSSiiqbziNAVGRHI7lVPW78G4=s225-no"
                 }
                 alt={user?.name}
               />
