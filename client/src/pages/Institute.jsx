@@ -30,15 +30,16 @@ const Institute = () => {
   }, [orgData]);
 
   useEffect(() => {
-    axios
-      .get(`${apiUrl}/institute/${params.id}`)
-      .then((res) => res.data)
-      .then((data) => setOrgData(data.org))
-      .then(
-        axios(`${apiUrl}/users`)
-          .then((res) => res.data)
-          .then((data) => setUsersData(data.users))
-      );
+    loggedIn &&
+      axios
+        .get(`${apiUrl}/institute/${params.id}`)
+        .then((res) => res.data)
+        .then((data) => setOrgData(data.org))
+        .then(
+          axios(`${apiUrl}/users`)
+            .then((res) => res.data)
+            .then((data) => setUsersData(data.users))
+        );
   }, [params.id]);
 
   useEffect(() => {
@@ -126,7 +127,7 @@ const Institute = () => {
             if (user.organisation.orgId === orgData._id)
               return (
                 <div
-                  key={user.id}
+                  key={user._id}
                   className="member-card"
                   onClick={() => history.push(`/user/${user._id}`)}
                 >
@@ -142,9 +143,9 @@ const Institute = () => {
                       className="user-vac-status"
                       style={{
                         color:
-                          user.vaccinationStatus == 2
+                          user.vaccinationStatus === 2
                             ? "Green"
-                            : user.vaccinationStatus == 1
+                            : user.vaccinationStatus === 1
                             ? "Blue"
                             : "Red",
                       }}
@@ -154,7 +155,7 @@ const Institute = () => {
                     <div
                       className="user-health-status"
                       style={{
-                        color: user.status == "Healthy" ? "Green" : "Red",
+                        color: user.status === "Healthy" ? "Green" : "Red",
                       }}
                     >
                       {user.status}

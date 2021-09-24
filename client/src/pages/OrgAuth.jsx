@@ -21,6 +21,7 @@ const OrgAuth = () => {
 
   useEffect(() => {
     if (loggedIn) history.push("/");
+    // eslint-disable-next-line
   }, [loggedIn]);
 
   const [name, setName] = useState("");

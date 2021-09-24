@@ -13,12 +13,14 @@ const Status = () => {
 
   useEffect(() => {
     if (!loggedIn) history.push("/");
+    // eslint-disable-next-line
   }, [loggedIn]);
 
   useEffect(() => {
     if (loggedIn) {
       user.vaccinationStatus && setVaccinationStatus(user.vaccinationStatus);
     }
+    // eslint-disable-next-line
   }, [loggedIn]);
 
   return (
