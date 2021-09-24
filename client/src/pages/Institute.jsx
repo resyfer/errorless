@@ -136,63 +136,65 @@ const Institute = () => {
 			</div>
 
 			<div className='heading'>Stats</div>
-			<div className='chart'>
-				<div className='pie-chart'>
-					<PieChart
-						data={[
-							{
-								title: vaccinationStatus[0],
-								value: orgData.status[0],
-								color: 'var(--theme-2-100)',
-							},
-							{
-								title: vaccinationStatus[1],
-								value: orgData.status[1],
-								color: 'var(--theme-3-100)',
-							},
-							{
-								title: vaccinationStatus[2],
-								value: orgData.status[2],
-								color: 'var(--theme-4-100)',
-							},
-						]}
-						animate={true}
-						startAngle={-30}
-					/>
+			{orgData && (
+				<div className='chart'>
+					<div className='pie-chart'>
+						<PieChart
+							data={[
+								{
+									title: vaccinationStatus[0],
+									value: orgData.status[0],
+									color: 'var(--theme-2-100)',
+								},
+								{
+									title: vaccinationStatus[1],
+									value: orgData.status[1],
+									color: 'var(--theme-3-100)',
+								},
+								{
+									title: vaccinationStatus[2],
+									value: orgData.status[2],
+									color: 'var(--theme-4-100)',
+								},
+							]}
+							animate={true}
+							startAngle={-30}
+						/>
+					</div>
+					<div className='legend'>
+						<div className='legend-itm'>
+							<div
+								className='legend-color'
+								style={{ backgroundColor: 'var(--theme-4-100)' }}></div>
+							<div className='legend-label'>
+								{vaccinationStatus[2]} - {orgData.status[2]}
+							</div>
+						</div>
+						<div className='legend-itm'>
+							<div
+								className='legend-color'
+								style={{ backgroundColor: 'var(--theme-3-100)' }}></div>
+							<div className='legend-label'>
+								{vaccinationStatus[1]} - {orgData.status[1]}
+							</div>
+						</div>
+						<div className='legend-itm'>
+							<div
+								className='legend-color'
+								style={{ backgroundColor: 'var(--theme-2-100)' }}></div>
+							<div className='legend-label'>
+								{vaccinationStatus[0]} - {orgData.status[0]}
+							</div>
+						</div>
+					</div>
 				</div>
-				<div className='legend'>
-					<div className='legend-itm'>
-						<div
-							className='legend-color'
-							style={{ backgroundColor: 'var(--theme-4-100)' }}></div>
-						<div className='legend-label'>
-							{vaccinationStatus[2]} - {orgData.status[2]}
-						</div>
-					</div>
-					<div className='legend-itm'>
-						<div
-							className='legend-color'
-							style={{ backgroundColor: 'var(--theme-3-100)' }}></div>
-						<div className='legend-label'>
-							{vaccinationStatus[1]} - {orgData.status[1]}
-						</div>
-					</div>
-					<div className='legend-itm'>
-						<div
-							className='legend-color'
-							style={{ backgroundColor: 'var(--theme-2-100)' }}></div>
-						<div className='legend-label'>
-							{vaccinationStatus[0]} - {orgData.status[0]}
-						</div>
-					</div>
-				</div>
-			</div>
+			)}
 
 			<div className='heading'>Members</div>
 			<div className='members'>
-				{users &&
-					users.map(user => {
-						if (user.organisation.id === orgData.id)
+				{usersData &&
+					usersData.map(user => {
+						if (user.organisation.orgId === orgData._id)
 							return (
 								<div
 									key={user.id}
