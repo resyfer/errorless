@@ -29,4 +29,4 @@ const orgSchema = new mongoose.Schema({
 
 const orgModel = mongoose.model('org', orgSchema);
 
-export default orgModel;
+module.exports = orgModel;

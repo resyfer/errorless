@@ -33,7 +33,7 @@ const Navbar = props => {
 			history.push('/');
 		}
 	};
-	console.log(user);
+
 	return (
 		<div className='navbar'>
 			<Link to={loggedIn ? `/user/${user._id}` : '/'} className='logo-link'>
