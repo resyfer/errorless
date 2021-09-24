@@ -44,4 +44,17 @@
 			margin-right: 5vh;
 		}
 	}
+
+	div.user {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+
+		i {
+			margin-right: 3vh;
+			color: var(--theme-4-100);
+			cursor: pointer;
+		}
+	}
 }

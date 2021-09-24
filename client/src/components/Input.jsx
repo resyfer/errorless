@@ -6,8 +6,9 @@ const Input = props => {
 		<div className='input-ctnr'>
 			<input
 				className='input'
-				htmlFor={props.name}
+				htmlFor={props?.name}
 				type={props.type}
+				value={props.value[0]}
 				minLength='2'
 				onChange={e => props.value[1](e.target.value)}
 			/>
