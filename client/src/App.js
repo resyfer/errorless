@@ -13,6 +13,7 @@ import Auth from "./pages/Auth";
 import OrgAuth from "./pages/OrgAuth";
 import Institute from "./pages/Institute";
 import Profile from "./pages/Profile";
+import Organisation from "./pages/Organisation";
 import Status from "./pages/Status";
 
 //* Components
@@ -75,10 +76,19 @@ function App() {
               <Institute />
             </Route>
 
-            <Route path="/user/:id">
-              <Navbar />
-              <Profile />
-            </Route>
+            {!isOrg && (
+              <Route path="/user/:id">
+                <Navbar />
+                <Profile />
+              </Route>
+            )}
+
+            {isOrg && (
+              <Route path="/organisation/:id">
+                <Navbar />
+                <Organisation />
+              </Route>
+            )}
 
             <Route exact path="/edit-profile">
               <Navbar />

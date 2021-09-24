@@ -12,7 +12,8 @@ import NoLinkButton from "./NoLinkButton";
 import Cookies from "js-cookie";
 
 const Navbar = () => {
-  const { loggedIn, setLoggedIn, user, setUser } = useContext(UserContext);
+  const { loggedIn, setLoggedIn, user, setUser, isOrg, setIsOrg } =
+    useContext(UserContext);
   const history = useHistory();
 
   const handleLogout = () => {
@@ -21,13 +22,23 @@ const Navbar = () => {
       Cookies.remove("jwt");
       setLoggedIn(false);
       setUser(null);
+      setIsOrg(false);
       history.push("/");
     }
   };
 
   return (
     <div className="navbar">
-      <Link to={loggedIn ? `/user/${user._id}` : "/"} className="logo-link">
+      <Link
+        to={
+          loggedIn
+            ? isOrg
+              ? `/organisation/${user._id}`
+              : `/user/${user._id}`
+            : "/"
+        }
+        className="logo-link"
+      >
         <img src="/img/logo.png" className="logo" alt="CoLive-21" />
       </Link>
       {loggedIn && (
@@ -36,11 +47,14 @@ const Navbar = () => {
             <Link to={`/institute/${user.organisation.orgId}`}>Institute</Link>
           </li>
           <li>
-            <Link to={`/user/${user._id}`}>Profile</Link>
+            {!isOrg && <Link to={`/user/${user._id}`}>Profile</Link>}
+            {isOrg && <Link to={`/manage`}>Manage</Link>}
           </li>
-          <li>
-            <Link to="/update">Update</Link>
-          </li>
+          {!isOrg && (
+            <li>
+              <Link to="/update">Update</Link>
+            </li>
+          )}
           <li>
             <Link to="/team">About Us</Link>
           </li>
@@ -51,7 +65,10 @@ const Navbar = () => {
           <div className="user">
             <i
               className="fas fa-user-edit"
-              onClick={() => history.push("/edit-profile")}
+              onClick={() => {
+                if (isOrg) history.push("/edit-profile");
+                else history.push("/edit-organisation");
+              }}
             ></i>
             <NoLinkButton name="Logout" onClick={handleLogout} />
           </div>
