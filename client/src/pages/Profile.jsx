@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 
 import UserContext from "../context/UserContext";
 
@@ -14,9 +13,13 @@ const Profile = (props) => {
     document.title = user?.name;
   }, [user?.name]);
 
-  if (!loggedIn) {
-    return <Redirect to="/" />;
-  }
+  // useEffect(() => {
+  //   if (!loggedIn) {
+  //     window.location.replace(`/`);
+  //   }
+  // }, [loggedIn]);
+
+  console.log(loggedIn);
 
   return (
     <main className="profile">
@@ -35,14 +38,14 @@ const Profile = (props) => {
           <div className="profileDetails">
             <p className="profileUserName">Pratik Majumdar</p>
             <p className="profileUserEmail">
-              <i class="fas fa-envelope"></i> info.pratikmajumdar@gmail.com
+              <i className="fas fa-envelope"></i> info.pratikmajumdar@gmail.com
             </p>
             <p className="profileUserPhone">
-              <i class="fas fa-phone"></i> 9101453497
+              <i className="fas fa-phone"></i> 9101453497
             </p>
             <p className="profileUserDesg">Student</p>
             <p className="profileUseOrg">
-              <i class="fas fa-university"></i> NIT, Silchar
+              <i className="fas fa-university"></i> NIT, Silchar
             </p>
             <p className="profileUserVaccStatus">Fully Vaccinated</p>
             <NoLinkButton
@@ -56,73 +59,73 @@ const Profile = (props) => {
           <div className="profileUserHistoryOverflow">
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
             <div className="profileUserHistory">
               <span>
-                <i class="fas fa-notes-medical"></i> I suffered from PTSD
+                <i className="fas fa-notes-medical"></i> I suffered from PTSD
               </span>
               <time>24/10/2021</time>
             </div>
