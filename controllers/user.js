@@ -97,9 +97,11 @@ module.exports.signin = async (req, res) => {
   }
 };
 
+module.exports.editDetails = async (req, res) => {};
+
 module.exports.users = async (req, res) => {
-	const users = await User.find();
-	res.json({
-		users,
-	});
+  const users = await User.find();
+  res.json({
+    users,
+  });
 };
