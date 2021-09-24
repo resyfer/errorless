@@ -66,7 +66,7 @@ const Navbar = () => {
             <i
               className="fas fa-user-edit"
               onClick={() => {
-                if (isOrg) history.push("/edit-profile");
+                if (!isOrg) history.push("/edit-profile");
                 else history.push("/edit-organisation");
               }}
             ></i>

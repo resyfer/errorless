@@ -104,7 +104,7 @@ const Auth = (props) => {
           password,
           confirmPassword,
           phoneNo,
-          photo,
+          photo: photo !== "" ? photo : "/img/defaultpic.png",
           organisation: {
             orgId: organisation.orgId,
             name: organisation.name,
