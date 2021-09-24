@@ -18,7 +18,7 @@ const emailRe =
   // eslint-disable-next-line
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 // eslint-disable-next-line
-const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,1000}$/;
+const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}$/;
 // eslint-disable-next-line
 const phoneRe = /^[0-9]{10}$/;
 
@@ -265,8 +265,8 @@ const Auth = (props) => {
             }
           >
             {isSignin
-              ? "Signin as an organization"
-              : "Register an organization"}
+              ? "Register an organisation"
+              : "Signin as an organisation"}
           </p>
         </div>
       </div>

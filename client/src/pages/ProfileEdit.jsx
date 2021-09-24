@@ -19,7 +19,7 @@ const emailRe =
 // eslint-disable-next-line
 const phoneRe = /^[0-9]{10}$/;
 
-const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}$/;
 
 const apiUrl = process.env.REACT_APP_API_URL;
 

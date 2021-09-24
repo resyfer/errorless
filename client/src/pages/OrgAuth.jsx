@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -7,6 +8,14 @@ import NoLinkButton from "../components/NoLinkButton";
 import UserContext from "../context/UserContext";
 
 import "./css/OrgAuth.scss";
+
+const emailRe =
+  // eslint-disable-next-line
+  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+// eslint-disable-next-line
+const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}$/;
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const OrgAuth = () => {
   const { loggedIn } = useContext(UserContext);
@@ -31,28 +40,101 @@ const OrgAuth = () => {
   const [imgLink, setImgLink] = useState("");
   const [description, setDescription] = useState("");
 
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    setError("");
+  }, [name, email, password, confirmPassword, imgLink, description]);
+
+  const handleOrgAuth = () => {
+    if (!emailRe.test(email)) {
+      setError("Enter valid email");
+    }
+    if (!passwordRe.test(password)) {
+      setError(
+        "Password must contain atleast 8 characters, 1 special character and 1 number"
+      );
+    }
+    if (!isSignin) {
+      if (password !== confirmPassword) {
+        setError("Password and Confirm Password doesn't match");
+      } else if (name.length === 0) {
+        setError("Enter valid name");
+      } else if (imgLink.length === 0) {
+        setError("Enter organisation image link");
+      } else if (description.length === 0) {
+        setError("Enter description of your organisation");
+      } else {
+        const orgData = {
+          name,
+          email,
+          password,
+          confirmPassword,
+          img: imgLink,
+          description,
+        };
+        axios
+          .post(`${apiUrl}/institute/signup`, orgData)
+          .then((res) => {
+            if (!res.data.success) {
+              setError(res.data.message);
+            } else {
+              const token = res.data.token;
+              const org = res.data.org;
+              console.log(org);
+              // do what you need to do with this data
+            }
+          })
+          .catch((err) => {
+            setError(err);
+          });
+      }
+    } else {
+      const orgData = {
+        email,
+        password,
+      };
+      axios
+        .post(`${apiUrl}/institute/signin`, orgData)
+        .then((res) => {
+          if (!res.data.success) {
+            setError(res.data.message);
+          } else {
+            const token = res.data.token;
+            const org = res.data.org;
+            console.log(org);
+            // do what you need to do with this data
+          }
+        })
+        .catch((err) => {
+          setError(err);
+        });
+    }
+  };
+
   return (
     <main className="org-auth">
       <div className="heading">
         Organisation {isSignin ? "Sign In" : "Sign Up"}
       </div>
+      {error && <p className="authError">{error}</p>}
       <div className="org-auth-form">
-        <Input
-          placeholder="Name"
-          label="Name"
-          type="text"
-          name="name"
-          value={[name, setName]}
-        />
         {!isSignin && (
           <Input
-            placeholder="Email"
-            label="Email"
+            placeholder="Name"
+            label="Name"
             type="text"
-            name="email"
-            value={[email, setEmail]}
+            name="name"
+            value={[name, setName]}
           />
         )}
+        <Input
+          placeholder="Email"
+          label="Email"
+          type="text"
+          name="email"
+          value={[email, setEmail]}
+        />
         <Input
           placeholder="Password"
           label="Password"
@@ -84,7 +166,10 @@ const OrgAuth = () => {
             ></textarea>
           </>
         )}
-        <NoLinkButton name={isSignin ? "Sign In" : "Sign Up"} />
+        <NoLinkButton
+          name={isSignin ? "Sign In" : "Sign Up"}
+          onClick={handleOrgAuth}
+        />
         <p
           className="switch-forms"
           onClick={() =>

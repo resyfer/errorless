@@ -6,7 +6,7 @@ const Org = require("../models/organisation");
 const emailRe =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}$/;
 
 module.exports.getDetails = async (req, res) => {
   const { userId } = req.params;
@@ -177,7 +177,7 @@ module.exports.editDetails = async (req, res) => {
       if (!validPassword) {
         return res.json({
           success: false,
-          message: "You have entered wrong prev password",
+          message: "You have entered wrong current password",
         });
       } else {
         if (password !== confirmPassword) {
