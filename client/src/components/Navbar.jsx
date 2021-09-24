@@ -11,7 +11,7 @@ import Button from "./Button";
 import NoLinkButton from "./NoLinkButton";
 import Cookies from "js-cookie";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const { loggedIn, setLoggedIn, user, setUser } = useContext(UserContext);
   const history = useHistory();
 
@@ -37,6 +37,9 @@ const Navbar = (props) => {
           </li>
           <li>
             <Link to={`/user/${user._id}`}>Profile</Link>
+          </li>
+          <li>
+            <Link to="/update">Update</Link>
           </li>
           <li>
             <Link to="/team">About Us</Link>

@@ -109,9 +109,9 @@
       justify-content: space-around;
 
       div.member-card {
-        width: 20rem;
+        width: 16rem;
         min-height: 45vh;
-        background-color: var(--theme-3-100);
+        background-color: var(--theme-2-100);
         padding: 2vh;
         display: flex;
         flex-direction: column;
@@ -119,6 +119,14 @@
         align-items: center;
         border-radius: 1.5vh;
         cursor: pointer;
+
+        &:hover {
+          box-shadow: 0 0 1.2vh 0.1vh var(--theme-3-100);
+          transition : {
+            duration: 0.3s;
+            timing-function: ease-in-out;
+          }
+        }
 
         div.member-pic {
           height: 22.5vh;

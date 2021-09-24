@@ -32,6 +32,7 @@ const ProfileEdit = (props) => {
   const [email, setEmail] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
+  const [designation, setDesignation] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [prevPassword, setPrevPassword] = useState("");
@@ -49,6 +50,8 @@ const ProfileEdit = (props) => {
       user.email && setEmail(user.email);
       user.photo && setPhotoUrl(user.photo);
       user.phoneNo && setPhoneNo(user.phoneNo);
+      user.organisation.designation &&
+        setDesignation(user.organisation.designation);
     }
     // eslint-disable-next-line
   }, [loggedIn]);
@@ -60,7 +63,16 @@ const ProfileEdit = (props) => {
 
   useEffect(() => {
     setError("");
-  }, [email, phoneNo, photoUrl, name, password, confirmPassword, prevPassword]);
+  }, [
+    email,
+    phoneNo,
+    photoUrl,
+    name,
+    designation,
+    password,
+    confirmPassword,
+    prevPassword,
+  ]);
 
   const handleSubmit = () => {
     if (phoneNo.length !== 0 && !phoneRe.test(phoneNo)) {
@@ -157,6 +169,13 @@ const ProfileEdit = (props) => {
           type="tel"
           name="number"
           value={[phoneNo, setPhoneNo]}
+        />
+        <Input
+          placeholder="Designation"
+          label="Designation"
+          type="text"
+          name="designation"
+          value={[designation, setDesignation]}
         />
         <Input
           placeholder="Change Password"

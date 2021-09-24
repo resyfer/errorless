@@ -126,7 +126,7 @@ const Auth = (props) => {
     <main className="auth">
       <div className="authCard">
         <div className="authForm">
-          <h2>{isSignin ? "Signup" : "Signin"}</h2>
+          <h2>{isSignin ? "User Signup" : "User Signin"}</h2>
           {isError?.length > 0 && <p className="authError">{isError}</p>}
           <Button
             name={
@@ -177,6 +177,16 @@ const Auth = (props) => {
             {isSignin
               ? "Already have an account ? Signin"
               : "New to CoLive-21 ? Signup"}
+          </p>
+          <p
+            className="org-auth-link"
+            onClick={() =>
+              history.push(`/org-auth/${isSignin ? "signup" : "signin"}`)
+            }
+          >
+            {isSignin
+              ? "Signin as an organization"
+              : "Register an organization"}
           </p>
         </div>
       </div>
