@@ -23,7 +23,15 @@ module.exports.getDetails = async (req, res) => {
 };
 
 module.exports.signup = async (req, res) => {
-  const { name, email, password, confirmPassword } = req.body;
+  const {
+    name,
+    email,
+    password,
+    confirmPassword,
+    organisation,
+    phoneNo,
+    photo,
+  } = req.body;
   try {
     const alreadyUser = await User.findOne({ email });
     if (!emailRe.test(email)) {
@@ -54,6 +62,9 @@ module.exports.signup = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      organisation,
+      photo,
+      phoneNo,
     });
     const user = await newUser.save();
     const token = jwt.sign(
