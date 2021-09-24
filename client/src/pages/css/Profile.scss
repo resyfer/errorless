@@ -26,7 +26,8 @@
       }
 
       img {
-        height: 12rem;
+        height: 17.5vh;
+        width: 17.5vh;
         border-radius: 50%;
         object-fit: cover;
         box-shadow: 4px 4px 10px rgb(199, 199, 199);
@@ -84,9 +85,9 @@
       }
 
       .profileUserHistory {
-        width: 100%;
+        width: 95%;
         padding: 2rem 1.2rem;
-        margin: 0.5rem 0;
+        margin: 0.5rem auto;
         box-shadow: 2px 2px 20px rgb(218, 218, 218);
         border-radius: 12px;
         position: relative;
