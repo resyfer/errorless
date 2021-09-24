@@ -36,6 +36,8 @@ const ProfileEdit = (props) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [prevPassword, setPrevPassword] = useState("");
+  const [vaccinationStatus, setVaccinationStatus] = useState("");
+  const [status, setStatus] = useState("");
 
   const [error, setError] = useState("");
 
@@ -52,6 +54,8 @@ const ProfileEdit = (props) => {
       user.phoneNo && setPhoneNo(user.phoneNo);
       user.organisation.designation &&
         setDesignation(user.organisation.designation);
+      user.vaccinationStatus && setVaccinationStatus(user.vaccinationStatus);
+      user.status && setStatus(user.status);
     }
     // eslint-disable-next-line
   }, [loggedIn]);
@@ -177,6 +181,34 @@ const ProfileEdit = (props) => {
           name="designation"
           value={[designation, setDesignation]}
         />
+        <select
+          className="drpdwn"
+          name="Vaccination Status"
+          type="text"
+          onChange={(e) => setVaccinationStatus(e.target.value)}
+          value={vaccinationStatus}
+        >
+          <option value="" disabled>
+            Select your Vaccination Status
+          </option>
+          <option value={0}>Not Vaccinated</option>
+          <option value={1}>Partially Vaccinated</option>
+          <option value={2}>Fully Vaccinated</option>
+        </select>
+        <select
+          className="drpdwn"
+          name="Health Status"
+          type="text"
+          onChange={(e) => setStatus(e.target.value)}
+          value={status}
+        >
+          <option value="" disabled>
+            Select your Health Status
+          </option>
+          <option value="Healthy">Healthy</option>
+          <option value="Infected">Infected</option>
+          <option value="Missing In Action">Missing In Action</option>
+        </select>
         <Input
           placeholder="Change Password"
           label="Change Password"
