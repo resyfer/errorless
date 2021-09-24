@@ -7,12 +7,15 @@ import vaccinationStatus from "../context/vaccinationStatus";
 import NoLinkButton from "../components/NoLinkButton";
 
 import axios from "axios";
+import QRCode from "qrcode.react";
 
 import "./css/Profile.scss";
 
 const Profile = (props) => {
   const { user, loggedIn } = useContext(UserContext);
   const [profileUser, setProfileUser] = useState();
+
+  const [showQR, setShowQR] = useState(false);
 
   const history = useHistory();
   const location = useLocation();
@@ -36,11 +39,7 @@ const Profile = (props) => {
           if (!res.data.success) {
             history.push(`/institute/${user.organisation.orgId}`);
           } else {
-            if (res.data.user.organisation.orgId === user.organisation.orgId) {
-              setProfileUser(res.data.user);
-            } else {
-              history.push(`/institute/${user.organisation.orgId}`);
-            }
+            setProfileUser(res.data.user);
           }
         })
         .catch((err) => console.log(err));
@@ -48,8 +47,6 @@ const Profile = (props) => {
       history.push(`/user/${user._id}`);
     }
   }, [location]);
-
-  console.log(loggedIn);
 
   return (
     <main className="profile">
@@ -87,10 +84,38 @@ const Profile = (props) => {
                   vaccinationStatus[profileUser.vaccinationStatus]}
               </p>
               {profileUser._id === user._id && (
-                <NoLinkButton
-                  style={{ padding: "1vh 2vh", margin: "1rem auto" }}
-                  name="Download your QR Code"
-                />
+                <>
+                  <NoLinkButton
+                    style={{ padding: "1vh 2vh", margin: "1rem auto" }}
+                    name="Show your QR Code"
+                    onClick={() => {
+                      setShowQR((prev) => !prev);
+                    }}
+                  />
+                  {showQR && (
+                    <>
+                      <div
+                        className="profileBackdrop"
+                        onClick={() => {
+                          setShowQR((prev) => !prev);
+                        }}
+                      ></div>
+                      <div className="profileModel">
+                        <div className="profileModelContent">
+                          <QRCode size={200} value="https://www.google.com" />
+                        </div>
+                        <div className="profileModelAction">
+                          <NoLinkButton
+                            name="Hide your QR code"
+                            onClick={() => {
+                              setShowQR((prev) => !prev);
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </>
               )}
             </div>
           </div>

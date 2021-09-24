@@ -65,6 +65,36 @@
           font-size: 1.2rem;
         }
       }
+      .profileBackdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(59, 59, 59, 0.6);
+        width: 100vw;
+        height: 100vh;
+        z-index: 100;
+      }
+      .profileModel {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border-radius: 12px;
+        z-index: 1000;
+        width: 40vh;
+        height: 40vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .profileModelContent {
+          height: 70%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
     }
 
     .profileRight {
