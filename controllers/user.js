@@ -7,6 +7,21 @@ const emailRe =
 
 const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 
+module.exports.getDetails = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const foundUser = await User.findById(userId);
+    if (!foundUser) {
+      return res.json({ success: false, message: "The user doesn't exist" });
+    } else {
+      return res.json({ success: true, user: foundUser });
+    }
+  } catch (err) {
+    console.log(err);
+    res.json({ success: false, message: err });
+  }
+};
+
 module.exports.signup = async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
   try {
@@ -41,7 +56,6 @@ module.exports.signup = async (req, res) => {
       password: hashedPassword,
     });
     const user = await newUser.save();
-    console.log(user);
     const token = jwt.sign(
       {
         email: user.email,
@@ -97,9 +111,105 @@ module.exports.signin = async (req, res) => {
   }
 };
 
+module.exports.editDetails = async (req, res) => {
+  const {
+    name,
+    photo,
+    prevPassword,
+    password,
+    confirmPassword,
+    phoneNo,
+    history,
+    vaccinationStatus,
+    status,
+    _id,
+    email,
+  } = req.body;
+
+  const { userId } = req.params;
+  if (_id !== userId) {
+    return res.json({
+      success: false,
+      message: "You don't have the permission to change details",
+    });
+  }
+  try {
+    const foundUser = await User.findById(userId);
+    if (!foundUser) {
+      res.json({
+        success: "False",
+        message: "You don't have the permission to change details",
+      });
+    }
+    if (prevPassword) {
+      const validPassword = await bcrypt.compare(
+        prevPassword,
+        foundUser.password
+      );
+      if (!validPassword) {
+        return res.json({
+          success: false,
+          message: "You have entered wrong prev password",
+        });
+      } else {
+        if (password !== confirmPassword) {
+          return res.json({
+            success: false,
+            message: "Password and Confirm Password don't match",
+          });
+        } else if (!passwordRe.test(password)) {
+          return res.json({
+            success: false,
+            message:
+              "Password must contain atleast 8 character, one special character and one number",
+          });
+        } else {
+          const salt = await bcrypt.genSalt(10);
+          const hashedPassword = await bcrypt.hash(password, salt);
+          const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            {
+              name,
+              photo,
+              password: hashedPassword,
+              phoneNo,
+              vaccinationStatus,
+              status,
+              history,
+              email,
+            },
+            { new: true }
+          );
+          const user = await updatedUser.save();
+          res.json({ success: true, user });
+        }
+      }
+    } else {
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        {
+          name,
+          photo,
+          phoneNo,
+          vaccinationStatus,
+          status,
+          history,
+          email,
+        },
+        { new: true }
+      );
+      const user = await updatedUser.save();
+      res.json({ success: true, user });
+    }
+  } catch (err) {
+    console.log(err);
+    res.json({ success: false, message: "Internal server error" });
+  }
+};
+
 module.exports.users = async (req, res) => {
-	const users = await User.find();
-	res.json({
-		users,
-	});
+  const users = await User.find();
+  res.json({
+    users,
+  });
 };

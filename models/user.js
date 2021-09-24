@@ -22,10 +22,7 @@ const UserSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: {
-        values: ["Alive", "Infected", "Dead"],
-        message: "Value outside accepted fields",
-      },
+      enum: ["Healthy", "Infected", "Missing in Action"],
     },
     phoneNo: {
       type: Number,
@@ -41,10 +38,7 @@ const UserSchema = new mongoose.Schema(
     },
     vaccinationStatus: {
       type: Number,
-      enum: {
-        default: [0, 1, 2],
-        message: "The values are not in the range",
-      },
+      enum: [0, 1, 2],
     },
     organisation: {
       orgId: mongoose.Schema.Types.ObjectId,
