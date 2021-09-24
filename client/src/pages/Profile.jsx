@@ -6,7 +6,6 @@ import vaccinationStatus from "../context/vaccinationStatus";
 import NoLinkButton from "../components/NoLinkButton";
 
 import "./css/Profile.scss";
-import axios from "axios";
 
 const Profile = (props) => {
   const { user, loggedIn } = useContext(UserContext);
@@ -70,9 +69,9 @@ const Profile = (props) => {
                 user.history.map((h, i) => (
                   <div className="profileUserHistory" key={i}>
                     <span>
-                      <i className="fas fa-notes-medical"></i> h.event
+                      <i className="fas fa-notes-medical"></i> {h.event}
                     </span>
-                    <time>h.date</time>
+                    <time>{new Date(h.date).toLocaleString()}</time>
                   </div>
                 ))}
             </div>

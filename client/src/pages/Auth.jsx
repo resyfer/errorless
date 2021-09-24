@@ -59,7 +59,7 @@ const Auth = (props) => {
     }
     if (isSignin) {
       if (password !== confirmPassword) {
-        setIsError("Password and Confirm Password doens't match");
+        setIsError("Password and Confirm Password doesn't match");
       } else if (name?.length === 0) {
         setIsError("Enter valid name");
       } else {
@@ -109,7 +109,7 @@ const Auth = (props) => {
             Cookies.set("jwt", JSON.stringify(res.data.token), {
               expires: 1,
             });
-            history.push("/");
+            window.location.replace("/");
           }
         })
         .catch((err) => {
