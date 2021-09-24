@@ -44,9 +44,18 @@ const Navbar = props => {
 				</ul>
 			)}
 			{loggedIn ? (
-				<NoLinkButton name='Logout' onClick={handleLogout} />
+				<>
+					<div className='user'>
+						<i
+							class='fas fa-user-edit'
+							onClick={() => history.push('/edit-profile')}></i>
+						<NoLinkButton name='Logout' onClick={handleLogout} />
+					</div>
+				</>
 			) : (
-				<Button name='Login / Sign Up' link='/auth' />
+				<>
+					<Button name='Login / Sign Up' link='/auth' />
+				</>
 			)}
 		</div>
 	);

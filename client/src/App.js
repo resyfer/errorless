@@ -18,6 +18,7 @@ import Navbar from './components/Navbar';
 
 //* CSS
 import './App.scss';
+import ProfileEdit from './pages/ProfileEdit';
 
 function App() {
 	const jwt = Cookies.get('jwt');
@@ -68,6 +69,11 @@ function App() {
 						<Route path='/user/:id'>
 							<Navbar />
 							<Profile />
+						</Route>
+
+						<Route exact path='/edit-profile'>
+							<Navbar />
+							<ProfileEdit title='Edit Profile | CoLive-21' />
 						</Route>
 					</Switch>
 				</Router>

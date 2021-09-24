@@ -1,39 +1,39 @@
 //* React
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 //* Components
-import Button from "../components/Button";
-import Input from "../components/Input";
+import Button from '../components/Button';
+import Input from '../components/Input';
 
-const Components = (props) => {
-  //* Set Title
-  useEffect(() => {
-    document.title = props.title;
-  }, [props.title]);
+const Components = props => {
+	//* Set Title
+	useEffect(() => {
+		document.title = props.title;
+	}, [props.title]);
 
-  const [inputValue, setInputValue] = useState("");
+	const [inputValue, setInputValue] = useState('');
 
-  return (
-    <main className="home">
-      Components
-      <br />
-      Page
-      <br />
-      <br />
-      <Button name="Hello" link="/" />
-      <br />
-      <br />
-      <Input
-        placeholder="Hello"
-        label="World"
-        type="text"
-        name="user"
-        value={[inputValue, setInputValue]}
-      />
-      <br />
-      Value: {inputValue}
-    </main>
-  );
+	return (
+		<main className='home'>
+			Components
+			<br />
+			Page
+			<br />
+			<br />
+			<Button name='Hello' link='/' />
+			<br />
+			<br />
+			<Input
+				placeholder='Hello'
+				label='World'
+				type='text'
+				name='user'
+				value={[inputValue, setInputValue]}
+			/>
+			<br />
+			Value: {inputValue}
+		</main>
+	);
 };
 
 export default Components;
