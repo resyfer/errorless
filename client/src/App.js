@@ -1,12 +1,6 @@
 //* React
 import { useEffect, useRef, useState } from 'react';
-import {
-	BrowserRouter as Router,
-	Link,
-	Route,
-	Switch,
-	useHistory,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 //* Dependencies
 import Cookies from 'js-cookie';

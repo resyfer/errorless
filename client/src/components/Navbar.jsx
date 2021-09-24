@@ -33,7 +33,7 @@ const Navbar = (props) => {
       history.push("/");
     }
   };
-  console.log(user);
+
   return (
     <div className="navbar">
       <Link to={loggedIn ? `/user/${user._id}` : "/"} className="logo-link">
@@ -42,7 +42,7 @@ const Navbar = (props) => {
       {loggedIn && (
         <ul className="nav-items-ctnr">
           <li>
-            <Link to="/institute/938742">Institute</Link>
+            <Link to={`/institute/${user.organisation.orgId}`}>Institute</Link>
           </li>
           <li>
             <Link to={`/user/${user._id}`}>Profile</Link>

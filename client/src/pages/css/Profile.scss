@@ -4,7 +4,7 @@
   justify-content: center;
 
   .profileContainer {
-    height: 90vh;
+    height: calc(100vh - var(--navbar-pc-height) - 4rem);
     width: 100%;
     box-shadow: 2px 2px 20px rgb(195, 195, 195);
     border-radius: 12px;
