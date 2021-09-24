@@ -39,11 +39,11 @@ const Institute = () => {
 					.then(res => res.data)
 					.then(data => setUsersData(data.users))
 			);
-	}, []);
+	}, [params.id]);
 
-	// useEffect(() => {
-	// 	if (!loggedIn) history.push('/');
-	// });
+	useEffect(() => {
+		if (!loggedIn) history.push('/');
+	});
 
 	return (
 		<main className='insti'>
@@ -131,7 +131,9 @@ const Institute = () => {
 									</div>
 									<div className='member-info'>
 										<div className='user-name'>{user.name}</div>
-										<div className='user-designation'>{user.designation}</div>
+										<div className='user-designation'>
+											{user.organisation.designation}
+										</div>
 										<div className='user-vac-status'>
 											{vaccinationStatus[user.vaccinationStatus]}
 										</div>

@@ -34,14 +34,11 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		console.log(window.location);
 		if (loggedIn && window.location.pathname === '/') {
 			redirectuser.current.click();
 		}
 		// eslint-disable-next-line
 	}, [loggedIn]);
-
-	console.log(loggedIn);
 
 	return (
 		<div className='App'>

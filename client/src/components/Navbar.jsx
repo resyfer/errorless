@@ -11,16 +11,7 @@ import Button from './Button';
 import NoLinkButton from './NoLinkButton';
 import Cookies from 'js-cookie';
 
-//! Temporary
-const user = {
-	id: 'abcd',
-	organisation: {
-		id: '1234',
-	},
-};
-
 const Navbar = props => {
-	// const {user, loggedIn} = useContext(UserContext);
 	const { loggedIn, setLoggedIn, user, setUser } = useContext(UserContext);
 	const history = useHistory();
 
