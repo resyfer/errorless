@@ -3,12 +3,12 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="./img/logo.png" />
+  <link rel="icon" type="image/png" href="/img/logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="CoLive-21" />
-  <link rel="apple-touch-icon" href="./img/logo.png" />
-  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="/img/logo.png" />
+  <link rel="manifest" href="/manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
   <!--* Fontawesome -->
@@ -28,7 +28,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./serviceworker.js')
+        navigator.serviceWorker.register(`${location.protocol + "//" + location.host}/serviceworker.js`)
           .then((reg) => console.log('Sucess: ', reg.scope))
           .catch((err) => console.log("Failure: ", err))
       })
