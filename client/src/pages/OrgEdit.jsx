@@ -56,7 +56,7 @@ const OrgEdit = () => {
           name="password"
           value={[password, setPassword]}
         />
-        {password != "" && (
+        {password !== "" && (
           <>
             <Input
               placeholder="Confirm Password"

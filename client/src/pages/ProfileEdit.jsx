@@ -235,7 +235,7 @@ const ProfileEdit = (props) => {
           name="password"
           value={[password, setPassword]}
         />
-        {password != "" && (
+        {password !== "" && (
           <>
             <Input
               placeholder="Confirm New Password"
