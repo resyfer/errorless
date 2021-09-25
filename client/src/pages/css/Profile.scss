@@ -167,3 +167,32 @@
     }
   }
 }
+
+@media (max-width: 850px) {
+  .profile {
+    .profileContainer {
+      flex-direction: column;
+      height: auto;
+
+      .profileLeft {
+        width: 100%;
+        padding-bottom: 0;
+        .profileDetails {
+          padding: 0;
+        }
+      }
+
+      .profileRight {
+        width: 100%;
+        border: none;
+        margin: 0;
+        text-align: center;
+        .profileUserHistory {
+          padding-bottom: 3rem;
+          span {
+          }
+        }
+      }
+    }
+  }
+}

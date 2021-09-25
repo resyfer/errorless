@@ -79,6 +79,8 @@
     justify-content: space-between;
     align-items: center;
 
+    z-index: 1000;
+
     .logo-link {
       height: calc(var(--navbar-pc-height) * 85 / 100);
 
