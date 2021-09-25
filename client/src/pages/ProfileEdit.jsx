@@ -82,7 +82,6 @@ const ProfileEdit = (props) => {
     password,
     confirmPassword,
     prevPassword,
-    designation,
   ]);
 
   useEffect(() => {

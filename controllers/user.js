@@ -228,9 +228,12 @@ module.exports.editDetails = async (req, res) => {
         },
         { new: true }
       );
+      const org = await Org.findById(organisation.orgId);
+      org.status[foundUser.vaccinationStatus]--;
       const user = await updatedUser.save();
-      console.log(user);
-      console.log(organisation);
+      org.status[user.vaccinationStatus]++;
+      org.markModified(status);
+      await org.save();
       res.json({ success: true, user });
     }
   } catch (err) {
@@ -248,7 +251,6 @@ module.exports.getAllHistory = async (req, res) => {
     if (userData) {
       const history = userData.history;
       res.json({ success: true, history });
-      console.log(history);
     }
   } catch (err) {
     res.json({ success: false, message: "Internal server error" });
@@ -266,7 +268,6 @@ module.exports.updateHistory = async (req, res) => {
       { new: true }
     );
     const updatedUser = await user.save();
-    console.log(updatedUser);
     res.json({ success: true, user: updatedUser });
   } catch (err) {
     console.log(err);
