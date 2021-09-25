@@ -40,7 +40,7 @@ const Institute = () => {
             .then((res) => res.data)
             .then((data) => setUsersData(data.users))
         );
-  }, [params.id]);
+  }, [params.id, loggedIn, isOrg]);
 
   useEffect(() => {
     if (!loggedIn && !isOrg) history.push("/");

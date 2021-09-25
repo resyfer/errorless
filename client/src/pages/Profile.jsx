@@ -13,7 +13,7 @@ import Cookies from "js-cookie";
 import "./css/Profile.scss";
 
 const Profile = () => {
-  const { user, loggedIn } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [profileUser, setProfileUser] = useState();
   const [showQR, setShowQR] = useState(false);
   const userHistories = [];
@@ -43,7 +43,7 @@ const Profile = () => {
     } else {
       history.push(`/user/${user._id}`);
     }
-  }, [location]);
+  }, [location, history,user._id,user.organisation.orgId]);
 
   useEffect(() => {
     if (profileUser && profileUser?._id === user._id) {
@@ -57,7 +57,8 @@ const Profile = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [profileUser]);
+    // eslint-disable-next-line
+  }, [profileUser, user._id]);
 
   const handleAddHistory = () => {
     userHistories.push({

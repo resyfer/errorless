@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 //* Components
 import Button from '../components/Button';
 import Input from '../components/Input';
-import User from '../components/User';
 
 const Components = props => {
 	//* Set Title
@@ -13,9 +12,6 @@ const Components = props => {
 	}, [props.title]);
 
 	const [inputValue, setInputValue] = useState('');
-
-	const [isBan, setIsBan] = useState(false);
-	const [isDelete, setIsDelete] = useState(false);
 
 	return (
 		<main className='home'>
@@ -40,9 +36,6 @@ const Components = props => {
 			<br />
 			<br />
 			<br />
-			<div style={{width:"90%"}}>
-				<User ban={[isBan, setIsBan]} setIsDelete={setIsDelete} name="Johnny Sins" desg="Student" img="/img/defaultpic.png" />
-			</div>
 
 		</main>
 	);

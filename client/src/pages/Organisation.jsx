@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
 import "./css/Organisation.scss";
@@ -16,11 +16,11 @@ const Organisation = () => {
   useEffect(() => {
     if (isOrg) document.title = org.name + " | CoLive-21";
     else document.title = "CoLive-21";
-  }, []);
+  }, [isOrg, org.name]);
 
   useEffect(() => {
     if (!isOrg || org._id !== params.id) history.push("/");
-  }, [org, isOrg]);
+  }, [org, isOrg, history, params.id]);
 
   // Pass these two functions to User props as banUser and deleteUser
   const userBan = (userId)=>{
