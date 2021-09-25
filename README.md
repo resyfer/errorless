@@ -9,3 +9,19 @@ Members:
 - Pratik Majumdar
 
 Please watch the [Demostration Video](https://github.com/NITS-Errorless/errorless/blob/main/2021-09-25%2017-51-47.mkv)
+
+Steps for setup
+```
+npm i
+cd client && npm i
+```
+
+Setting up server
+```
+npm run dev
+```
+
+Setting up client
+```
+cd client && npm start
+```
