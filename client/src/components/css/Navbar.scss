@@ -76,18 +76,10 @@
 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 
     z-index: 1000;
-
-    .logo-link {
-      height: calc(var(--navbar-pc-height) * 85 / 100);
-
-      img {
-        height: 100%;
-      }
-    }
 
     ul {
       list-style: none;
@@ -106,6 +98,7 @@
     ul.nav-items-ctnr {
       display: flex;
       flex-direction: row;
+      justify-content: space-around;
 
       li {
         margin-right: 5vh;
@@ -115,7 +108,7 @@
     div.user {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
 
       i {

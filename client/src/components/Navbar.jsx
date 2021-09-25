@@ -45,7 +45,7 @@ const Navbar = () => {
         {window.innerWidth > 500 ? (
           <img src="/img/logo.png" className="logo" alt="CoLive-21" />
         ) : (
-          <i class="fas fa-home"></i>
+          <i className="fas fa-home"></i>
         )}
       </Link>
       <ul className="nav-items-ctnr">
@@ -56,28 +56,51 @@ const Navbar = () => {
                 {window.innerWidth > 500 ? (
                   "Institute"
                 ) : (
-                  <i class="far fa-building"></i>
+                  <i className="fas fa-university"></i>
                 )}
               </Link>
             </li>
             <li>
-              {!isOrg && <Link to={`/user/${user._id}`}>Profile</Link>}
-              {isOrg && <Link to={`/manage`}>Manage</Link>}
+              <Link to={`/user/${user._id}`}>
+                {window.innerWidth > 500 ? (
+                  "Profile"
+                ) : (
+                  <i className="fas fa-user-alt"></i>
+                )}
+              </Link>
             </li>
           </>
         )}
         {isOrg && (
           <>
             <li>
-              <Link to={`/institute/${org._id}`}>Institute</Link>
+              <Link to={`/institute/${org._id}`}>
+                {window.innerWidth > 500 ? (
+                  "Institute"
+                ) : (
+                  <i className="fas fa-university"></i>
+                )}
+              </Link>
             </li>
             <li>
-              <Link to={`/organisation/${org._id}`}>Manage</Link>
+              <Link to={`/organisation/${org._id}`}>
+                {window.innerWidth > 500 ? (
+                  "Manage"
+                ) : (
+                  <i className="fas fa-user-shield"></i>
+                )}
+              </Link>
             </li>
           </>
         )}
         <li>
-          <Link to="/team">About Us</Link>
+          <Link to="/team">
+            {window.innerWidth > 500 ? (
+              "About Us"
+            ) : (
+              <i className="fas fa-info-circle"></i>
+            )}
+          </Link>
         </li>
       </ul>
       {loggedIn || isOrg ? (
@@ -90,12 +113,26 @@ const Navbar = () => {
                 else history.push("/edit-organisation");
               }}
             ></i>
-            <NoLinkButton name="Logout" onClick={handleLogout} />
+            {window.innerWidth > 500 && (
+              <NoLinkButton name="Logout" onClick={handleLogout} />
+            )}
+            {window.innerWidth < 500 && (
+              <i className="fas fa-sign-out-alt" onClick={handleLogout}></i>
+            )}
           </div>
         </>
       ) : (
         <>
-          <Button name="Login / Sign Up" link="/auth" />
+          <Button
+            name={
+              window.innerWidth > 500 ? (
+                "Login / Sign Up"
+              ) : (
+                <i className="fas fa-sign-in-alt"></i>
+              )
+            }
+            link="/auth"
+          />
         </>
       )}
     </div>
