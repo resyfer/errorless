@@ -15,6 +15,7 @@ const Organisation = () => {
   const { isOrg, org } = useContext(UserContext);
   const params = useParams();
   const history = useHistory();
+  // eslint-disable-next-line
   const [orgData, setOrgData] = useState(null);
   const [usersData, setUsersData] = useState(null);
 
