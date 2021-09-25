@@ -75,7 +75,7 @@ const Auth = (props) => {
       .catch((err) => {
         setIsError(err.message);
       });
-  }, []);
+  }, [apiUrl]);
 
   const handleAuth = () => {
     if (!emailRe.test(email)) {

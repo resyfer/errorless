@@ -39,7 +39,7 @@ const Organisation = () => {
             .then((res) => res.data)
             .then((data) => setUsersData(data.users))
         );
-  }, [params.id, isOrg]);
+  }, [params.id, isOrg, apiUrl]);
 
   // Pass these two functions to User props as banUser and deleteUser
   const userBan = (userId) => {

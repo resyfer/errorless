@@ -43,7 +43,7 @@ const Profile = () => {
     } else {
       history.push(`/user/${user._id}`);
     }
-  }, [location, history, user?._id, user?.organisation.orgId]);
+  }, [location, history, user?._id, user?.organisation.orgId, url]);
 
   useEffect(() => {
     if (profileUser && profileUser?._id === user._id) {
