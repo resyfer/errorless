@@ -136,6 +136,7 @@ function App() {
               <About title="About us | CoLive-21" />
             </Route>
           </Switch>
+          <div className="bottom-box"></div>
         </Router>
       </UserContext.Provider>
     </div>

@@ -1,60 +1,156 @@
-.auth {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .authCard {
-    width: 80vw;
-    box-shadow: 2px 2px 20px rgb(204, 204, 204);
-    border-radius: 12px;
+@media screen and (min-width: 500px) {
+  .auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .authForm {
-      width: 80%;
-      margin: auto;
-      padding: 4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    div.heading {
+      text-align: center;
+      margin: 6vh auto 3vh auto;
+      width: 50%;
+      font-size: 3vh;
+      color: var(--theme-4-100);
+      border-bottom: 0.2vh solid var(--theme-4-100);
+      font-weight: bold;
+    }
 
-      .authFormContainer {
+    .authCard {
+      width: 80vw;
+      box-shadow: 2px 2px 20px rgb(204, 204, 204);
+      border-radius: 12px;
+
+      .authForm {
+        width: 80%;
+        margin: auto;
+        padding: 4rem;
         display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-        .authFormRight {
-          select {
-            cursor: pointer;
-            position: relative;
-            margin-left: 1vh;
-            padding: 0 0.2rem;
-            width: 40vh;
-            height: 6vh;
-            outline: 0;
-            color: var(--theme-4-100);
-            font-size: 2.4vh;
-            background-color: var(--theme-1-100);
-            border: 0.3vh solid var(--theme-3-100);
-            border-radius: 0.75vh;
+        .authFormContainer {
+          display: flex;
 
-            option {
-              font-size: 2vh;
+          .authFormRight {
+            select {
+              cursor: pointer;
+              position: relative;
+              margin-left: 1vh;
+              padding: 0 0.2rem;
+              width: 40vh;
+              height: 6vh;
+              outline: 0;
+              color: var(--theme-4-100);
+              font-size: 2.4vh;
+              background-color: var(--theme-1-100);
+              border: 0.3vh solid var(--theme-3-100);
+              border-radius: 0.75vh;
+
+              option {
+                font-size: 2vh;
+              }
             }
           }
         }
-      }
 
-      .authError {
-        margin: 0.4rem;
-        color: rgb(255, 97, 97);
-        font-weight: bold;
-        letter-spacing: 0.1rem;
+        .authError {
+          margin: 0.4rem;
+          color: rgb(255, 97, 97);
+          font-weight: bold;
+          letter-spacing: 0.1rem;
+        }
       }
     }
-  }
-  .authMsg {
-    cursor: pointer;
-  }
+    .authMsg {
+      cursor: pointer;
+    }
 
-  .org-auth-link {
-    margin-top: 2vh;
-    cursor: pointer;
+    .org-auth-link {
+      margin-top: 2vh;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div.heading {
+      text-align: center;
+      margin: 6vw auto 3vw auto;
+      white-space: nowrap;
+      width: 90%;
+      font-size: 4vw;
+      color: var(--theme-4-100);
+      border-bottom: 0.2vh solid var(--theme-4-100);
+      font-weight: bold;
+    }
+
+    .authCard {
+      width: 80vw;
+      box-shadow: 2px 2px 20px rgb(204, 204, 204);
+      border-radius: 12px;
+
+      .authForm {
+        width: 80%;
+        margin: auto;
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .authFormContainer {
+          display: flex;
+          flex-direction: column;
+
+          .authFormRight {
+            select {
+              cursor: pointer;
+              position: relative;
+              padding: 0 0.2rem;
+              margin: 3vw auto;
+              width: 60vw;
+              height: 6vh;
+              outline: 0;
+              color: var(--theme-4-100);
+              font-size: 2.4vh;
+              background-color: var(--theme-1-100);
+              border: 0.3vh solid var(--theme-3-100);
+              border-radius: 0.75vh;
+
+              option {
+                font-size: 2vh;
+              }
+            }
+          }
+        }
+
+        .authError {
+          margin: 0.4rem;
+          color: rgb(255, 97, 97);
+          font-weight: bold;
+          letter-spacing: 0.1rem;
+        }
+      }
+    }
+    .authMsg {
+      margin-top: 2vh;
+      cursor: pointer;
+      font-size: 3vw;
+      white-space: nowrap;
+      text-align: justify;
+    }
+
+    .org-auth-link {
+      margin-top: 2vh;
+      font-size: 3vw;
+      white-space: nowrap;
+      text-align: justify;
+      cursor: pointer;
+    }
   }
 }

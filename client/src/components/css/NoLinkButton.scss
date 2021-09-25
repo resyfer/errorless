@@ -37,3 +37,43 @@
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  div.noLinkBtn {
+    margin: 1vw;
+    height: fit-content;
+    width: fit-content;
+    padding: 4vw;
+    border-radius: 1vw;
+    text-align: center;
+    background-color: var(--theme-3-100);
+    box-sizing: border-box;
+    cursor: pointer;
+
+    button {
+      font-size: 5vw;
+      color: var(--theme-4-100);
+      text-decoration: none;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+
+      &:active {
+        outline: none;
+      }
+    }
+
+    &:hover {
+      background-color: var(--theme-4-100);
+      box-shadow: 0 0 1.2vh 0.1vh var(--theme-3-100);
+      transition: {
+        timing-function: ease-out;
+        duration: 0.2s;
+      }
+
+      button {
+        color: var(--theme-1-100);
+      }
+    }
+  }
+}

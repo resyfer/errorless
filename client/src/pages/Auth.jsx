@@ -182,7 +182,9 @@ const Auth = (props) => {
     <main className="auth">
       <div className="authCard">
         <div className="authForm">
-          <h2>{isSignin ? "User Signup" : "User Signin"}</h2>
+          <div className="heading">
+            {isSignin ? "User Signup" : "User Signin"}
+          </div>
           {isError?.length > 0 && <p className="authError">{isError}</p>}
           <div className="authFormContainer">
             <div className="authFormLeft">

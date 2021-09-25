@@ -1,32 +1,65 @@
 @media screen and (min-width: 500px) {
-	div.btn {
-		margin: 1vh;
-		height: fit-content;
-		width: fit-content;
-		padding: 2vh 4vh;
-		border-radius: 0.75vh;
-		text-align: center;
-		background-color: var(--theme-3-100);
-		box-sizing: border-box;
-		cursor: pointer;
+  div.btn {
+    margin: 1vh;
+    height: fit-content;
+    width: fit-content;
+    padding: 2vh 4vh;
+    border-radius: 0.75vh;
+    text-align: center;
+    background-color: var(--theme-3-100);
+    box-sizing: border-box;
+    cursor: pointer;
 
-		a {
-			font-size: 2.4vh;
-			color: var(--theme-4-100);
-			text-decoration: none;
-		}
+    a {
+      font-size: 2.4vh;
+      color: var(--theme-4-100);
+      text-decoration: none;
+    }
 
-		&:hover {
-			background-color: var(--theme-4-100);
-			box-shadow: 0 0 1.2vh 0.1vh var(--theme-3-100);
-			transition: {
-				timing-function: ease-out;
-				duration: 0.2s;
-			}
+    &:hover {
+      background-color: var(--theme-4-100);
+      box-shadow: 0 0 1.2vh 0.1vh var(--theme-3-100);
+      transition: {
+        timing-function: ease-out;
+        duration: 0.2s;
+      }
 
-			a {
-				color: var(--theme-1-100);
-			}
-		}
-	}
+      a {
+        color: var(--theme-1-100);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  div.btn {
+    margin: 1vw;
+    height: fit-content;
+    width: fit-content;
+    padding: 4vw;
+    border-radius: 0.75vw;
+    text-align: center;
+    background-color: var(--theme-3-100);
+    box-sizing: border-box;
+    cursor: pointer;
+
+    a {
+      font-size: 4vw;
+      color: var(--theme-4-100);
+      text-decoration: none;
+    }
+
+    &:hover {
+      background-color: var(--theme-4-100);
+      box-shadow: 0 0 1.2vh 0.1vh var(--theme-3-100);
+      transition: {
+        timing-function: ease-out;
+        duration: 0.2s;
+      }
+
+      a {
+        color: var(--theme-1-100);
+      }
+    }
+  }
 }

@@ -42,14 +42,22 @@ const Navbar = () => {
         }
         className="logo-link"
       >
-        <img src="/img/logo.png" className="logo" alt="CoLive-21" />
+        {window.innerWidth > 500 ? (
+          <img src="/img/logo.png" className="logo" alt="CoLive-21" />
+        ) : (
+          <i class="fas fa-home"></i>
+        )}
       </Link>
       <ul className="nav-items-ctnr">
         {loggedIn && (
           <>
             <li>
               <Link to={`/institute/${user.organisation.orgId}`}>
-                Institute
+                {window.innerWidth > 500 ? (
+                  "Institute"
+                ) : (
+                  <i class="far fa-building"></i>
+                )}
               </Link>
             </li>
             <li>
