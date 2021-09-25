@@ -4,6 +4,10 @@ import UserContext from "../context/UserContext";
 
 import "./css/Organisation.scss";
 
+import axios from 'axios';
+
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const Organisation = () => {
   const { isOrg, org } = useContext(UserContext);
   const params = useParams();
@@ -17,6 +21,29 @@ const Organisation = () => {
   useEffect(() => {
     if (!isOrg || org._id !== params.id) history.push("/");
   }, [org, isOrg]);
+
+  // Pass these two functions to User props as banUser and deleteUser
+  const userBan = (userId)=>{
+    axios.post(`${apiUrl}/user/${userId}/ban`)
+    .then(res=>{
+      if(res.data.success){
+        // needs to be reloaded to see the changes
+      }
+    }).catch(err => {
+      console.log(err);
+    })
+  };
+
+  const userDelete = (userId)=>{
+    axios.post(`${apiUrl}/user/${userId}/delete`)
+    .then(res=>{
+      if(res.data.success){
+        // needs to be reloaded to see the changes
+      }
+    }).catch(err => {
+      console.log(err);
+    })
+  };
 
   return (
     <main className="organisation">

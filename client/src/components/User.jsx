@@ -6,23 +6,12 @@ const User = props => {
 
   const userRef = useRef();
 
-  useEffect(()=>{
-    if(props.ban[0]){
-      userRef.current.style.cursor = "not-allowed";
-      userRef.current.style.opacity = "0.4"; 
-    }
-  },[props.ban[0]])
-
   const handleBan = (e)=>{
-    if(!props.ban[0]){
-      props.ban[1](true);
-      userRef.current.style.cursor = "not-allowed";
-      userRef.current.style.opacity = "0.4"; 
-    }
+    props.banUser(props.userId);
   }
 
   const handleDelete = (e)=>{
-    props.setIsDelete(true);
+    props.deleteUser(props.userID);
   }
   return (
     <div className="userCompContainer" ref={userRef}>

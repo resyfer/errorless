@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Org = require("../models/organisation");
+const Ban = require("../models/ban");
 
 const emailRe =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -34,6 +35,13 @@ module.exports.signup = async (req, res) => {
     photo,
   } = req.body;
   try {
+    const bannedUser = await Ban.findOne({bannedUser: email})
+    if(bannedUser){
+      return res.json({
+        success:false,
+        message: "You are banned by your organisation. You can't signup"
+      })
+    }
     const alreadyUser = await User.findOne({ email });
     if (!emailRe.test(email)) {
       return res.json({
@@ -97,6 +105,13 @@ module.exports.signup = async (req, res) => {
 module.exports.signin = async (req, res) => {
   const { email, password } = req.body;
   try {
+    const bannedUser = await Ban.findOne({bannedUser: email})
+    if(bannedUser){
+      return res.json({
+        success:false,
+        message: "You are banned by your organisation. You can't signin"
+      })
+    }
     if (!emailRe.test(email))
       return res.json({ success: false, message: "Enter valid email" });
     const user = await User.findOne({ email });
@@ -286,3 +301,33 @@ module.exports.users = async (req, res) => {
     users,
   });
 };
+
+module.exports.banUser = async(req,res)=>{
+  const {userId} = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    console.log(user);    
+    await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
+    await new Ban({bannedUser: user.email}).save();
+    await User.remove({_id: userId})
+    res.json({success:true, message: "User banned"})
+  } catch (err) {
+    console.log(err);
+    res.json({success:false, message: "Internal Server Error"})
+  }
+}
+
+module.exports.deleteUser = async(req,res)=>{
+  const {userId} = req.params;
+  try {
+    const user = await User.findById(userId);
+    console.log(user);    
+    await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
+    await User.remove({_id: userId})
+    res.json({success:true, message: "User Deleted"})
+  } catch (err) {
+    console.log(err);
+    res.json({success:false, message: "Internal Server Error"})
+  }
+}
