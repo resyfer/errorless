@@ -21,7 +21,7 @@ const Institute = () => {
   const history = useHistory();
   const params = useParams();
 
-  const { loggedIn } = useContext(UserContext);
+  const { loggedIn, isOrg } = useContext(UserContext);
 
   //* Set Title
   useEffect(() => {
@@ -30,7 +30,7 @@ const Institute = () => {
   }, [orgData]);
 
   useEffect(() => {
-    loggedIn &&
+    (loggedIn || isOrg) &&
       axios
         .get(`${apiUrl}/institute/${params.id}`)
         .then((res) => res.data)
@@ -43,7 +43,7 @@ const Institute = () => {
   }, [params.id]);
 
   useEffect(() => {
-    if (!loggedIn) history.push("/");
+    if (!loggedIn && !isOrg) history.push("/");
   });
 
   return (

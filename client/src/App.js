@@ -16,6 +16,7 @@ import Profile from "./pages/Profile";
 import Organisation from "./pages/Organisation";
 import About from "./pages/About";
 import ProfileEdit from "./pages/ProfileEdit";
+import OrgEdit from "./pages/OrgEdit";
 
 //* Components
 import Navbar from "./components/Navbar";
@@ -28,13 +29,25 @@ function App() {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isOrg, setIsOrg] = useState(false);
+  const [org, setOrg] = useState(false);
 
   const redirectuser = useRef();
+  const redirectorg = useRef();
   useEffect(() => {
-    const getUser = Cookies.get("user");
-    if (getUser) {
-      setUser(JSON.parse(getUser));
-      setLoggedIn(true);
+    const type = Cookies.get("type");
+
+    if (type === "user") {
+      const getUser = Cookies.get("user");
+      if (getUser) {
+        setUser(JSON.parse(getUser));
+        setLoggedIn(true);
+      }
+    } else if (type === "org") {
+      const getOrg = Cookies.get("org");
+      if (getOrg) {
+        setOrg(JSON.parse(getOrg));
+        setIsOrg(true);
+      }
     }
   }, []);
 
@@ -42,16 +55,30 @@ function App() {
     if (loggedIn && window.location.pathname === "/") {
       redirectuser.current.click();
     }
+    if (isOrg && window.location.pathname === "/") {
+      redirectorg.current.click();
+    }
     // eslint-disable-next-line
-  }, [loggedIn]);
+  }, [loggedIn, isOrg]);
 
   return (
     <div className="App">
       <UserContext.Provider
-        value={{ user, setUser, loggedIn, setLoggedIn, jwt, isOrg, setIsOrg }}
+        value={{
+          user,
+          setUser,
+          loggedIn,
+          setLoggedIn,
+          jwt,
+          isOrg,
+          setIsOrg,
+          org,
+          setOrg,
+        }}
       >
         <Router>
           {user && <Link ref={redirectuser} to={`/user/${user._id}`} />}
+          {org && <Link ref={redirectorg} to={`/organisation/${org._id}`} />}
           <Switch>
             <Route exact path="/">
               <Home title="CoLive-21" />
@@ -90,10 +117,19 @@ function App() {
               </Route>
             )}
 
-            <Route exact path="/edit-profile">
-              <Navbar />
-              <ProfileEdit title="Edit Profile | CoLive-21" />
-            </Route>
+            {loggedIn && (
+              <Route exact path="/edit-profile">
+                <Navbar />
+                <ProfileEdit title="Edit Profile | CoLive-21" />
+              </Route>
+            )}
+
+            {isOrg && (
+              <Route exact path="/edit-organisation">
+                <Navbar />
+                <OrgEdit title="Edit Profile | CoLive-21" />
+              </Route>
+            )}
 
             <Route exact path="/team">
               <Navbar />

@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { useEffect, useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -18,7 +19,7 @@ const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}$/;
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const OrgAuth = () => {
-  const { loggedIn } = useContext(UserContext);
+  const context = useContext(UserContext);
   const history = useHistory();
 
   const params = useParams();
@@ -28,10 +29,10 @@ const OrgAuth = () => {
     document.title = `${isSignin ? "Sign In" : "Sign Up"} | CoLive-21`;
   }, [isSignin]);
 
-  useEffect(() => {
-    if (loggedIn) history.push("/");
-    // eslint-disable-next-line
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   if (context.loggedIn) history.push("/");
+  //   // eslint-disable-next-line
+  // }, [context.loggedIn]);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -79,10 +80,18 @@ const OrgAuth = () => {
             if (!res.data.success) {
               setError(res.data.message);
             } else {
-              const token = res.data.token;
-              const org = res.data.org;
-              console.log(org);
-              // do what you need to do with this data
+              context.setOrg(res.data.org);
+              context.setIsOrg(true);
+              Cookies.set("org", JSON.stringify(res.data.org), {
+                expires: 1,
+              });
+              Cookies.set("jwt", JSON.stringify(res.data.token), {
+                expires: 1,
+              });
+              Cookies.set("type", "org", {
+                expires: 1,
+              });
+              history.push("/");
             }
           })
           .catch((err) => {
@@ -100,10 +109,18 @@ const OrgAuth = () => {
           if (!res.data.success) {
             setError(res.data.message);
           } else {
-            const token = res.data.token;
-            const org = res.data.org;
-            console.log(org);
-            // do what you need to do with this data
+            context.setOrg(res.data.org);
+            context.setIsOrg(true);
+            Cookies.set("org", JSON.stringify(res.data.org), {
+              expires: 1,
+            });
+            Cookies.set("jwt", JSON.stringify(res.data.token), {
+              expires: 1,
+            });
+            Cookies.set("type", "org", {
+              expires: 1,
+            });
+            history.push("/");
           }
         })
         .catch((err) => {

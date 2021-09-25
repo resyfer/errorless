@@ -12,17 +12,20 @@ import NoLinkButton from "./NoLinkButton";
 import Cookies from "js-cookie";
 
 const Navbar = () => {
-  const { loggedIn, setLoggedIn, user, setUser, isOrg, setIsOrg } =
+  const { loggedIn, setLoggedIn, user, setUser, isOrg, setIsOrg, org, setOrg } =
     useContext(UserContext);
   const history = useHistory();
 
   const handleLogout = () => {
-    if (loggedIn) {
+    if (loggedIn || isOrg) {
       Cookies.remove("user");
       Cookies.remove("jwt");
+      Cookies.remove("type");
+      Cookies.remove("org");
       setLoggedIn(false);
       setUser(null);
       setIsOrg(false);
+      setOrg(null);
       history.push("/");
     }
   };
@@ -32,30 +35,44 @@ const Navbar = () => {
       <Link
         to={
           loggedIn
-            ? isOrg
-              ? `/organisation/${user._id}`
-              : `/user/${user._id}`
+            ? `/user/${user._id}`
+            : isOrg
+            ? `/organisation/${org._id}`
             : "/"
         }
         className="logo-link"
       >
         <img src="/img/logo.png" className="logo" alt="CoLive-21" />
       </Link>
-      {loggedIn && (
-        <ul className="nav-items-ctnr">
-          <li>
-            <Link to={`/institute/${user.organisation.orgId}`}>Institute</Link>
-          </li>
-          <li>
-            {!isOrg && <Link to={`/user/${user._id}`}>Profile</Link>}
-            {isOrg && <Link to={`/manage`}>Manage</Link>}
-          </li>
-          <li>
-            <Link to="/team">About Us</Link>
-          </li>
-        </ul>
-      )}
-      {loggedIn ? (
+      <ul className="nav-items-ctnr">
+        {loggedIn && (
+          <>
+            <li>
+              <Link to={`/institute/${user.organisation.orgId}`}>
+                Institute
+              </Link>
+            </li>
+            <li>
+              {!isOrg && <Link to={`/user/${user._id}`}>Profile</Link>}
+              {isOrg && <Link to={`/manage`}>Manage</Link>}
+            </li>
+          </>
+        )}
+        {isOrg && (
+          <>
+            <li>
+              <Link to={`/institute/${org._id}`}>Institute</Link>
+            </li>
+            <li>
+              <Link to={`/organisation/${org._id}`}>Manage</Link>
+            </li>
+          </>
+        )}
+        <li>
+          <Link to="/team">About Us</Link>
+        </li>
+      </ul>
+      {loggedIn || isOrg ? (
         <>
           <div className="user">
             <i

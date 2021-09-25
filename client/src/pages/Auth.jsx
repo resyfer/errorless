@@ -125,6 +125,9 @@ const Auth = (props) => {
               Cookies.set("jwt", JSON.stringify(res.data.token), {
                 expires: 1,
               });
+              Cookies.set("type", "user", {
+                expires: 1,
+              });
               history.push("/");
             }
           })
@@ -151,7 +154,10 @@ const Auth = (props) => {
             Cookies.set("jwt", JSON.stringify(res.data.token), {
               expires: 1,
             });
-            window.location.replace("/");
+            Cookies.set("type", "user", {
+              expires: 1,
+            });
+            history.push("/");
           }
         })
         .catch((err) => {
@@ -227,11 +233,17 @@ const Auth = (props) => {
                     Select your organisation Name
                   </option>
                   {allOrg &&
-                    allOrg.map((o) => (
-                      <option value={o.orgId} key={o.orgId}>
-                        {o.organisation}
-                      </option>
-                    ))}
+                    allOrg
+                      .sort((a, b) => {
+                        if (a.organisation > b.organisation) return 1;
+                        else if (a.organisation < b.organisation) return -1;
+                        else return 0;
+                      })
+                      .map((o) => (
+                        <option value={o.orgId} key={o.orgId}>
+                          {o.organisation}
+                        </option>
+                      ))}
                 </select>
                 <Input
                   name="designation"
