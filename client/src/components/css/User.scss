@@ -1,0 +1,50 @@
+.userCompContainer {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2vh;
+  background-color: white;
+  box-shadow: 4px 4px 20px rgb(202, 202, 202);
+  border-radius: 10px;
+
+  .userCompDetails {
+    width: 90%;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 12vh;
+      height: 12vh;
+      object-fit: contain;
+      border-radius: 50%;
+      box-shadow: 2px 2px 20px rgb(216, 216, 216);
+    }
+    span {
+      margin-left: 2vh;
+      font-size: 3vh;
+    }
+    small {
+      margin-left: 1vh;
+      font-style: italic;
+    }
+  }
+  .userCompActions {
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
+
+    i {
+      font-size: 4vh;
+      cursor: pointer;
+    }
+
+    .fa-trash {
+      color: rgb(255, 67, 67);
+    }
+
+    .fa-ban {
+      color: rgb(114, 114, 114);
+    }
+  }
+}
