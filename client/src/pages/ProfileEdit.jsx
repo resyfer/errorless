@@ -21,10 +21,10 @@ const phoneRe = /^[0-9]{10}$/;
 
 const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}$/;
 
-const apiUrl = process.env.REACT_APP_API_URL;
-
 const ProfileEdit = (props) => {
-  const { user, loggedIn } = useContext(UserContext);
+  const { user, loggedIn, url } = useContext(UserContext);
+
+  const apiUrl = url;
 
   const history = useHistory();
 

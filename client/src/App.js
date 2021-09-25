@@ -30,6 +30,10 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isOrg, setIsOrg] = useState(false);
   const [org, setOrg] = useState(false);
+  const url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5000/api"
+      : "https://errorless-electrathon.herokuapp.com/api";
 
   const redirectuser = useRef();
   const redirectorg = useRef();
@@ -74,6 +78,7 @@ function App() {
           setIsOrg,
           org,
           setOrg,
+          url,
         }}
       >
         <Router>

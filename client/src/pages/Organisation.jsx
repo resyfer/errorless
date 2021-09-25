@@ -9,15 +9,15 @@ import "./css/Organisation.scss";
 
 import axios from "axios";
 
-const apiUrl = process.env.REACT_APP_API_URL;
-
 const Organisation = () => {
-  const { isOrg, org } = useContext(UserContext);
+  const { isOrg, org, url } = useContext(UserContext);
   const params = useParams();
   const history = useHistory();
   // eslint-disable-next-line
   const [orgData, setOrgData] = useState(null);
   const [usersData, setUsersData] = useState(null);
+
+  const apiUrl = url;
 
   useEffect(() => {
     if (isOrg) document.title = org.name + " | CoLive-21";

@@ -12,8 +12,6 @@ import { PieChart } from "react-minimal-pie-chart";
 //* CSS
 import "./css/Institute.scss";
 
-const apiUrl = process.env.REACT_APP_API_URL;
-
 const Institute = () => {
   const [orgData, setOrgData] = useState(null);
   const [usersData, setUsersData] = useState(null);
@@ -21,7 +19,9 @@ const Institute = () => {
   const history = useHistory();
   const params = useParams();
 
-  const { loggedIn, isOrg } = useContext(UserContext);
+  const { loggedIn, isOrg, url } = useContext(UserContext);
+
+  const apiUrl = url;
 
   //* Set Title
   useEffect(() => {

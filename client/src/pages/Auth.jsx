@@ -22,8 +22,6 @@ const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}$/;
 // eslint-disable-next-line
 const phoneRe = /^[0-9]{10}$/;
 
-const apiUrl = process.env.REACT_APP_API_URL;
-
 const Auth = (props) => {
   const [isSignin, setIsSignin] = useState(false);
   const [name, setName] = useState("");
@@ -42,6 +40,8 @@ const Auth = (props) => {
   const [allOrg, setAllOrg] = useState([]);
 
   const userCtx = useContext(UserContext);
+
+  const apiUrl = userCtx.url;
 
   const history = useHistory();
 

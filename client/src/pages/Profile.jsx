@@ -13,7 +13,7 @@ import Cookies from "js-cookie";
 import "./css/Profile.scss";
 
 const Profile = () => {
-  const { user } = useContext(UserContext);
+  const { user, url } = useContext(UserContext);
   const [profileUser, setProfileUser] = useState();
   const [showQR, setShowQR] = useState(false);
   const userHistories = [];
@@ -31,7 +31,7 @@ const Profile = () => {
     const userId = window.location.pathname.split("/user/")[1];
     if (userId) {
       axios
-        .get(`${process.env.REACT_APP_API_URL}/user/${userId}`)
+        .get(`${url}/user/${userId}`)
         .then((res) => {
           if (!res.data.success) {
             history.push(`/institute/${user.organisation.orgId}`);
@@ -43,13 +43,13 @@ const Profile = () => {
     } else {
       history.push(`/user/${user._id}`);
     }
-  }, [location, history,user?._id,user?.organisation.orgId]);
+  }, [location, history, user?._id, user?.organisation.orgId]);
 
   useEffect(() => {
     if (profileUser && profileUser?._id === user._id) {
       // fetch user history
       axios
-        .get(`${process.env.REACT_APP_API_URL}/user/${user._id}/history`)
+        .get(`${url}/user/${user._id}/history`)
         .then((res) => {
           if (res.data.success) {
             userHistories.push(...res.data.history);
@@ -66,7 +66,7 @@ const Profile = () => {
       event: addHistoryInput.current.value,
     });
     axios
-      .put(`${process.env.REACT_APP_API_URL}/user/${user._id}/history`, {
+      .put(`${url}/user/${user._id}/history`, {
         userId: user._id,
         history: userHistories,
       })

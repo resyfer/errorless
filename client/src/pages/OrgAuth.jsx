@@ -16,12 +16,11 @@ const emailRe =
 // eslint-disable-next-line
 const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}$/;
 
-const apiUrl = process.env.REACT_APP_API_URL;
-
 const OrgAuth = () => {
   const context = useContext(UserContext);
   const history = useHistory();
 
+  const apiUrl = context.url;
   const params = useParams();
   const isSignin = params.mode === "signin";
 
