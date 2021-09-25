@@ -45,7 +45,7 @@ const Navbar = () => {
         {window.innerWidth > 500 ? (
           <img src="/img/logo.png" className="logo" alt="CoLive-21" />
         ) : (
-          <i class="fas fa-home"></i>
+          <i className="fas fa-home"></i>
         )}
       </Link>
       <ul className="nav-items-ctnr">
@@ -56,29 +56,18 @@ const Navbar = () => {
                 {window.innerWidth > 500 ? (
                   "Institute"
                 ) : (
-                  <i class="fas fa-university"></i>
+                  <i className="fas fa-university"></i>
                 )}
               </Link>
             </li>
             <li>
-              {!isOrg && (
-                <Link to={`/user/${user._id}`}>
-                  {window.innerWidth > 500 ? (
-                    "Profile"
-                  ) : (
-                    <i class="fas fa-user-alt"></i>
-                  )}
-                </Link>
-              )}
-              {isOrg && (
-                <Link to={`/manage`}>
-                  {window.innerWidth > 500 ? (
-                    "Manage"
-                  ) : (
-                    <i class="fas fa-user-shield"></i>
-                  )}
-                </Link>
-              )}
+              <Link to={`/user/${user._id}`}>
+                {window.innerWidth > 500 ? (
+                  "Profile"
+                ) : (
+                  <i className="fas fa-user-alt"></i>
+                )}
+              </Link>
             </li>
           </>
         )}
@@ -89,16 +78,16 @@ const Navbar = () => {
                 {window.innerWidth > 500 ? (
                   "Institute"
                 ) : (
-                  <i class="fas fa-university"></i>
+                  <i className="fas fa-university"></i>
                 )}
               </Link>
             </li>
             <li>
               <Link to={`/organisation/${org._id}`}>
                 {window.innerWidth > 500 ? (
-                  "Institute"
+                  "Manage"
                 ) : (
-                  <i class="fas fa-university"></i>
+                  <i className="fas fa-user-shield"></i>
                 )}
               </Link>
             </li>
@@ -109,7 +98,7 @@ const Navbar = () => {
             {window.innerWidth > 500 ? (
               "About Us"
             ) : (
-              <i class="fas fa-info-circle"></i>
+              <i className="fas fa-info-circle"></i>
             )}
           </Link>
         </li>
@@ -128,7 +117,7 @@ const Navbar = () => {
               <NoLinkButton name="Logout" onClick={handleLogout} />
             )}
             {window.innerWidth < 500 && (
-              <i class="fas fa-sign-out-alt" onClick={handleLogout}></i>
+              <i className="fas fa-sign-out-alt" onClick={handleLogout}></i>
             )}
           </div>
         </>
@@ -139,7 +128,7 @@ const Navbar = () => {
               window.innerWidth > 500 ? (
                 "Login / Sign Up"
               ) : (
-                <i class="fas fa-sign-in-alt"></i>
+                <i className="fas fa-sign-in-alt"></i>
               )
             }
             link="/auth"

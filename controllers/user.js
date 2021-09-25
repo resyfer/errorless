@@ -46,12 +46,12 @@ module.exports.signup = async (req, res) => {
     photo,
   } = req.body;
   try {
-    const bannedUser = await Ban.findOne({bannedUser: email})
-    if(bannedUser){
+    const bannedUser = await Ban.findOne({ bannedUser: email });
+    if (bannedUser) {
       return res.json({
-        success:false,
-        message: "You are banned by your organisation. You can't signup"
-      })
+        success: false,
+        message: "You are banned by your organisation. You can't signup",
+      });
     }
     const alreadyUser = await User.findOne({ email });
     if (!emailRe.test(email)) {
@@ -128,12 +128,12 @@ module.exports.signup = async (req, res) => {
 module.exports.signin = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const bannedUser = await Ban.findOne({bannedUser: email})
-    if(bannedUser){
+    const bannedUser = await Ban.findOne({ bannedUser: email });
+    if (bannedUser) {
       return res.json({
-        success:false,
-        message: "You are banned by your organisation. You can't signin"
-      })
+        success: false,
+        message: "You are banned by your organisation. You can't signin",
+      });
     }
     if (!emailRe.test(email))
       return res.json({ success: false, message: "Enter valid email" });
@@ -339,19 +339,22 @@ module.exports.users = async (req, res) => {
   });
 };
 
-module.exports.banUser = async(req,res)=>{
-  const {userId} = req.params;
+module.exports.banUser = async (req, res) => {
+  const { userId } = req.params;
 
   try {
     const user = await User.findById(userId);
     // await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
     const org = await Org.findById(user.organisation.orgId);
-    org.crew = org.crew.filter(crew => crew.id !== user._id);
+    const newCrew = await org.crew.filter(
+      (crewMember) => !crewMember.equals(user._id)
+    );
+    org.crew = newCrew;
     org.markModified("crew");
     org.status[user.vaccinationStatus] = org.status[user.vaccinationStatus] - 1;
     org.markModified("status");
     await org.save();
-    await new Ban({bannedUser: user.email}).save();
+    await new Ban({ bannedUser: user.email }).save();
     await transporter.sendMail(
       {
         from: '"CoLive-21" <errorless.nits@gmail.com>',
@@ -363,20 +366,25 @@ module.exports.banUser = async(req,res)=>{
         console.log(error);
       }
     );
-    await User.remove({_id: userId})
-    res.json({success:true, message: "User banned"})
+    await User.remove({ _id: userId });
+    res.json({ success: true, message: "User banned" });
   } catch (err) {
     console.log(err);
-    res.json({success:false, message: "Internal Server Error"})
+    res.json({ success: false, message: "Internal Server Error" });
   }
-}
+};
 
-module.exports.deleteUser = async(req,res)=>{
-  const {userId} = req.params;
+module.exports.deleteUser = async (req, res) => {
+  const { userId } = req.params;
+
   try {
     const user = await User.findById(userId);
     // await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
-    org.crew = org.crew.filter(crew => crew.id !== user._id);
+    const org = await Org.findById(user.organisation.orgId);
+    const newCrew = await org.crew.filter(
+      (crewMember) => !crewMember.equals(user._id)
+    );
+    org.crew = newCrew;
     org.markModified("crew");
     org.status[user.vaccinationStatus] = org.status[user.vaccinationStatus] - 1;
     org.markModified("status");
@@ -385,17 +393,17 @@ module.exports.deleteUser = async(req,res)=>{
       {
         from: '"CoLive-21" <errorless.nits@gmail.com>',
         to: `${user.email}`,
-        subject: "User Deleted | CoLive-21",
-        text: `Your account has been deleted from your organisation ${user.organisation.name}`,
+        subject: "User Removed | CoLive-21",
+        text: `You have been removed from your organisation ${user.organisation.name}`,
       },
       (error) => {
         console.log(error);
       }
     );
-    await User.remove({_id: userId})
-    res.json({success:true, message: "User Deleted"})
+    await User.remove({ _id: userId });
+    res.json({ success: true, message: "User banned" });
   } catch (err) {
     console.log(err);
-    res.json({success:false, message: "Internal Server Error"})
+    res.json({ success: false, message: "Internal Server Error" });
   }
-}
+};
