@@ -209,7 +209,12 @@ module.exports.editDetails = async (req, res) => {
             },
             { new: true }
           );
+          const org = await Org.findById(organisation.orgId);
+          org.status[foundUser.vaccinationStatus]--;
           const user = await updatedUser.save();
+          org.status[user.vaccinationStatus]++;
+          org.markModified(status);
+          await org.save();
           res.json({ success: true, user });
         }
       }
