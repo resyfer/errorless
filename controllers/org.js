@@ -1,6 +1,17 @@
 const orgModel = require("../models/organisation");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
+
+let transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "errorless.nits@gmail.com",
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 const emailRe =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -68,6 +79,18 @@ const signup = async (req, res) => {
       },
       process.env.JWT_SECRET_KEY,
       { expiresIn: "24h" }
+    );
+
+    await transporter.sendMail(
+      {
+        from: '"CoLive-21" <errorless.nits@gmail.com>',
+        to: `${org.email}`,
+        subject: "Organisation Registered | CoLive-21",
+        text: `Organisation ${org.name} Registered`,
+      },
+      (error) => {
+        console.log(error);
+      }
     );
     res.json({ success: true, org, token });
   } catch (err) {

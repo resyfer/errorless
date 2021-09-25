@@ -227,7 +227,6 @@ const Auth = (props) => {
                   name="organisation"
                   type="text"
                   onChange={handleOrganisation}
-                  value={organisation.name}
                 >
                   <option value="" disabled>
                     Select your organisation Name

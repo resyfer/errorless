@@ -21,6 +21,7 @@ const OrgEdit = () => {
     org.name && setName(org.name);
     org.email && setEmail(org.email);
     org.img && setImg(org.img);
+    org.description && setDescription(org.description);
   }, [org, isOrg]);
 
   return (

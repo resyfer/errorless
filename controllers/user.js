@@ -3,11 +3,22 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Org = require("../models/organisation");
 const Ban = require("../models/ban");
+const nodemailer = require("nodemailer");
 
 const emailRe =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}$/;
+
+let transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "errorless.nits@gmail.com",
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 module.exports.getDetails = async (req, res) => {
   const { userId } = req.params;
@@ -83,6 +94,18 @@ module.exports.signup = async (req, res) => {
     org.status[0] = org.status[0] + 1;
     org.markModified("status");
     await org.save();
+
+    await transporter.sendMail(
+      {
+        from: '"CoLive-21" <errorless.nits@gmail.com>',
+        to: `${org.email}`,
+        subject: "User Registered | CoLive-21",
+        text: `New user ${user.name} registered to ${org.name}`,
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
     const token = jwt.sign(
       {
@@ -288,6 +311,20 @@ module.exports.updateHistory = async (req, res) => {
       { new: true }
     );
     const updatedUser = await user.save();
+    const org = await Org.findById(updatedUser.organisation.orgId);
+    await transporter.sendMail(
+      {
+        from: '"CoLive-21" <errorless.nits@gmail.com>',
+        to: `${org.email}`,
+        subject: "User Updated History | CoLive-21",
+        text: `User ${user.name} from ${
+          user.organisation.name
+        } updated their history : ${history[history.length - 1].event}`,
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     res.json({ success: true, user: updatedUser });
   } catch (err) {
     console.log(err);
@@ -307,9 +344,19 @@ module.exports.banUser = async(req,res)=>{
 
   try {
     const user = await User.findById(userId);
-    console.log(user);    
     await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
     await new Ban({bannedUser: user.email}).save();
+    await transporter.sendMail(
+      {
+        from: '"CoLive-21" <errorless.nits@gmail.com>',
+        to: `${user.email}`,
+        subject: "User Banned | CoLive-21",
+        text: `You have been banned from your organisation ${user.organisation.name}`,
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     await User.remove({_id: userId})
     res.json({success:true, message: "User banned"})
   } catch (err) {
@@ -322,8 +369,18 @@ module.exports.deleteUser = async(req,res)=>{
   const {userId} = req.params;
   try {
     const user = await User.findById(userId);
-    console.log(user);    
     await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
+    await transporter.sendMail(
+      {
+        from: '"CoLive-21" <errorless.nits@gmail.com>',
+        to: `${user.email}`,
+        subject: "User Deleted | CoLive-21",
+        text: `Your account has been deleted from your organisation ${user.organisation.name}`,
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     await User.remove({_id: userId})
     res.json({success:true, message: "User Deleted"})
   } catch (err) {
