@@ -344,7 +344,13 @@ module.exports.banUser = async(req,res)=>{
 
   try {
     const user = await User.findById(userId);
-    await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
+    // await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
+    const org = await Org.findById(user.organisation.orgId);
+    org.crew = org.crew.filter(crew => crew.id !== user._id);
+    org.markModified("crew");
+    org.status[user.vaccinationStatus] = org.status[user.vaccinationStatus] - 1;
+    org.markModified("status");
+    await org.save();
     await new Ban({bannedUser: user.email}).save();
     await transporter.sendMail(
       {
@@ -369,7 +375,12 @@ module.exports.deleteUser = async(req,res)=>{
   const {userId} = req.params;
   try {
     const user = await User.findById(userId);
-    await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
+    // await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
+    org.crew = org.crew.filter(crew => crew.id !== user._id);
+    org.markModified("crew");
+    org.status[user.vaccinationStatus] = org.status[user.vaccinationStatus] - 1;
+    org.markModified("status");
+    await org.save();
     await transporter.sendMail(
       {
         from: '"CoLive-21" <errorless.nits@gmail.com>',
