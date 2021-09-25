@@ -2,11 +2,22 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Org = require("../models/organisation");
+const nodemailer = require("nodemailer");
 
 const emailRe =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const passwordRe = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}$/;
+
+let transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "errorless.nits@gmail.com",
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 module.exports.getDetails = async (req, res) => {
   const { userId } = req.params;
@@ -75,6 +86,18 @@ module.exports.signup = async (req, res) => {
     org.status[0] = org.status[0] + 1;
     org.markModified("status");
     await org.save();
+
+    await transporter.sendMail(
+      {
+        from: '"CoLive-21" <errorless.nits@gmail.com>',
+        to: `${org.email}`,
+        subject: "User Registered | CoLive-21",
+        text: `New user ${user.name} registered to ${org.name}`,
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
     const token = jwt.sign(
       {
@@ -273,6 +296,20 @@ module.exports.updateHistory = async (req, res) => {
       { new: true }
     );
     const updatedUser = await user.save();
+    const org = await Org.findById(updatedUser.organisation.orgId);
+    await transporter.sendMail(
+      {
+        from: '"CoLive-21" <errorless.nits@gmail.com>',
+        to: `${org.email}`,
+        subject: "User Updated History | CoLive-21",
+        text: `User ${user.name} from ${
+          user.organisation.name
+        } updated their history : ${history[history.length - 1].event}`,
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     res.json({ success: true, user: updatedUser });
   } catch (err) {
     console.log(err);
