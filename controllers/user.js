@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Org = require("../models/organisation");
+const Ban = require("../models/ban");
 const nodemailer = require("nodemailer");
 
 const emailRe =
@@ -45,6 +46,13 @@ module.exports.signup = async (req, res) => {
     photo,
   } = req.body;
   try {
+    const bannedUser = await Ban.findOne({bannedUser: email})
+    if(bannedUser){
+      return res.json({
+        success:false,
+        message: "You are banned by your organisation. You can't signup"
+      })
+    }
     const alreadyUser = await User.findOne({ email });
     if (!emailRe.test(email)) {
       return res.json({
@@ -120,6 +128,13 @@ module.exports.signup = async (req, res) => {
 module.exports.signin = async (req, res) => {
   const { email, password } = req.body;
   try {
+    const bannedUser = await Ban.findOne({bannedUser: email})
+    if(bannedUser){
+      return res.json({
+        success:false,
+        message: "You are banned by your organisation. You can't signin"
+      })
+    }
     if (!emailRe.test(email))
       return res.json({ success: false, message: "Enter valid email" });
     const user = await User.findOne({ email });
@@ -323,3 +338,53 @@ module.exports.users = async (req, res) => {
     users,
   });
 };
+
+module.exports.banUser = async(req,res)=>{
+  const {userId} = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
+    await new Ban({bannedUser: user.email}).save();
+    await transporter.sendMail(
+      {
+        from: '"CoLive-21" <errorless.nits@gmail.com>',
+        to: `${user.email}`,
+        subject: "User Banned | CoLive-21",
+        text: `You have been banned from your organisation ${user.organisation.name}`,
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    await User.remove({_id: userId})
+    res.json({success:true, message: "User banned"})
+  } catch (err) {
+    console.log(err);
+    res.json({success:false, message: "Internal Server Error"})
+  }
+}
+
+module.exports.deleteUser = async(req,res)=>{
+  const {userId} = req.params;
+  try {
+    const user = await User.findById(userId);
+    await Org.updateOne({_id:user.organisation.orgId}, {$pull:{crew: user._id}})
+    await transporter.sendMail(
+      {
+        from: '"CoLive-21" <errorless.nits@gmail.com>',
+        to: `${user.email}`,
+        subject: "User Deleted | CoLive-21",
+        text: `Your account has been deleted from your organisation ${user.organisation.name}`,
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    await User.remove({_id: userId})
+    res.json({success:true, message: "User Deleted"})
+  } catch (err) {
+    console.log(err);
+    res.json({success:false, message: "Internal Server Error"})
+  }
+}
